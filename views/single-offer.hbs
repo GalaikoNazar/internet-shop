@@ -21,13 +21,22 @@
             </div>
             {{/if}}
             <ul class="pie_size">
+                {{#if offer.price_small }}
                 <li onclick="pieSize(this,{{offer.price_small}})" class="active">25см/800гр</li>
-                <li onclick="pieSize(this, {{offer.price_big}})">32см/1200гр</li>
+                {{/if}}
+                {{#if offer.price_big }}
+                <li onclick="pieSize(this,{{offer.price_big}})" {{#if offer.price_small}} {{else}}class="active"
+                    {{/if}}>
+                    32см/1200г</li>
+                {{/if}}
             </ul>
+
             <ul class="pie_footer">
                 <li>
-                    <h3 class="pie_price offer_price">{{offer.price_small}} грн.</h3>
+                    <h3 class="pie_price offer_price">
+                        {{#if offer.price_small}}{{offer.price_small}}{{else}}{{offer.price_big}}{{/if}} грн.</h3>
                 </li>
+
                 <li>
                     <button class="btn to_order" onclick="toOrder(this)">
                         В корзину

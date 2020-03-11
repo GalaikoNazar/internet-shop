@@ -3,13 +3,13 @@
     <div class="container">
         <div class="right">
             <nav>
-                <a href="/actions">
+                <a href="/actions" {{#_if expected='Actions' val=titlePage}} class="active"{{/_if}}>
                     Акции
                     <img src="/img/miniStar.svg" class="star" alt="">
                 </a>
-                <a href="/" class="active">Меню</a>
-                <a href="/delivery">Доставка</a>
-                <a href="/contact">Контакты</a>
+                <a href="/" {{#_if expected='Main' val=titlePage}} class="active"{{/_if}}>Меню</a>
+                <a href="/delivery" {{#_if expected='Delivery' val=titlePage}} class="active"{{/_if}}>Доставка</a>
+                <a href="/contact" {{#_if expected='Contact' val=titlePage}} class="active"{{/_if}}>Контакты</a>
                 <a href="/kitchen">Admin</a>
             </nav>
             <div class="contact mobile">
@@ -33,6 +33,3 @@
         </button>
     </div>
 </header>
-{{!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-Odit nobis quidem repudiandae accusamus explicabo 
-neque recusandae animi! Eos, illum repellat. --}}

@@ -11,19 +11,20 @@ connection.connect(function(err) {
 class Offer {
   static async add(el) {
     const {
+      category,
       title,
       status,
       type_small,
       price_small,
       type_big,
       price_big,
-      category,
+      main_ingredient,
       description,
       image,
       thumb_image,
       storage
     } = el;
-    const sql = `INSERT INTO offers(title, status, type_small, price_small, type_big, price_big, category, description, image, thumb_image, storage) VALUES("${title}","${status}", "${type_small}","${price_small}", "${type_big}", "${price_big}", "${category}", "${description}", "${image}", "${thumb_image}", "${storage}")`;
+    const sql = `INSERT INTO offers(category, title, status, type_small, price_small, type_big, price_big, main_ingredient, description, image, thumb_image, storage) VALUES("${category}","${title}","${status}", "${type_small}","${price_small}", "${type_big}", "${price_big}", "${main_ingredient}", "${description}", "${image}", "${thumb_image}", "${storage}")`;
     return await connection
       .query(sql)
       .then(result => {
@@ -100,4 +101,57 @@ class Offer {
   }
 }
 
+class Category {
+  static async add(el) {
+    const sql = `INSERT INTO category(title_category) VALUES("${el.title_category}")`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        console.log("Data post, saved");
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async get() {
+    const sql = `SELECT * FROM category`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async remove(id) {
+    const sql = `DELETE FROM category WHERE id="${id}"`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async edit(el) {
+    const sql = `UPDATE category SET title_category="${el.title_category}" WHERE id="${el.id}"`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+}
+
 module.exports.Offer = Offer;
+module.exports.Category = Category;

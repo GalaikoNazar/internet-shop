@@ -1,9 +1,12 @@
 {{> admin-nav }}
+
 <section class="cart">
     <div class="container">
         <h2 class="block_title">Кухня</h2>
-
-        <form action="/add-offer" method="POST" class="form " ref='uploadForm' encType="multipart/form-data">
+        {{#_if expected='hit' val=field}}
+        hit
+        {{/_if}}
+        <form action="/add-offer" method="POST" class="form for_pizza" ref='uploadForm' encType="multipart/form-data">
             <!-- for total price -->
             <div class="cart_line">
                 <h2 class="block_title">
@@ -12,7 +15,7 @@
                 <div class="form_line contact_info">
                     <label>
                         <span>Category</span>
-                        <select name="category">
+                        <select name="category" onchange="Order.category(this)">
                             <option>Pizza</option>
                             <option>Drinks</option>
                             <option>Sauces</option>
@@ -41,8 +44,8 @@
                         <span class="error">Поле обязательно для заполнения</span>
                     </label>
                     <hr>
-                    <div class="form_line contact_info c2">
-                        <label>
+                    <div class="form_line contact_info c2 ">
+                        <label class="for_pizza">
                             <span>Type small</span>
                             <select name="type_small">
                                 <option>25см/800г</option>
@@ -56,7 +59,7 @@
                             <input type="text" name="price_small">
                             <span class="error">Поле обязательно для заполнения</span>
                         </label>
-                        <label>
+                        <label class="for_pizza">
                             <span>Type big</span>
                             <select name="type_big">
                                 <option>32см/1200г</option>
@@ -65,14 +68,14 @@
                             </select>
                             <span class="error">Поле обязательно для заполнения</span>
                         </label>
-                        <label>
+                        <label class="for_pizza">
                             <span>Price a <big>big</big> pizza </span>
                             <input type="text" name="price_big">
                             <span class="error">Поле обязательно для заполнения</span>
                         </label>
                     </div>
                     <hr>
-                    <label>
+                    <label class="for_pizza">
                         <span>Main ingredien</span>
                         <select name="main_ingredient">
                             <option>М'ясна</option>
@@ -84,11 +87,17 @@
                     </label>
                     <label>
                         <span>Storage </span>
-                        <textarea name="storage"></textarea>
+                        <textarea name="storage">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+Odit nobis quidem repudiandae accusamus explicabo 
+neque recusandae animi! Eos, illum repellat.
+</textarea>
                     </label>
                     <label>
                         <span>Description</span>
-                        <textarea name="description"></textarea>
+                        <textarea name="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+Odit nobis quidem repudiandae accusamus explicabo 
+neque recusandae animi! Eos, illum repellat.
+</textarea>
                     </label>
                 </div>
             </div>

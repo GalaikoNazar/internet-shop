@@ -1,11 +1,11 @@
 <ul class="breadcrambs">
   <li>
-    <a href="/">Главная</a>
+    <a href="/kitchen" {{#_if expected='Add new offer' val=titlePage}} class="active"{{/_if}}>Add new offer</a>
   </li>
   <li>
-    <a href="/kitchen">Add new offer</a>
+    <a href="/all-offers" {{#_if expected='All offers' val=titlePage}} class="active"{{/_if}}>All offers</a>
   </li>
-  <li>
-    <a href="/all-offers">All offers</a>
+   <li>
+    <a href="/category"  {{#_if expected='Category' val=titlePage}} class="active"{{/_if}}>Category</a>
   </li>
 </ul>

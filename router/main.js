@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
   let obj = {};
   Offer.get().then(item => {
     obj.offers = item;
-    obj.titlePage = "main";
+    obj.titlePage = "Main";
     res.render("main", obj);
   });
 });

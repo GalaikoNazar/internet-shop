@@ -10,6 +10,18 @@
                     {{#if offers}}
                     {{#each offers}}
                     <div class="col">
+                        {{#_if expected='Hit' val=status }}
+                        <div class="col_status hit">
+                            Hit
+                        </div>
+                        {{/_if}}
+
+                        {{#_if expected='New' val=status }}
+                        <div class="col_status new">
+                            New
+                        </div>
+                        {{/_if}}
+
                         <div class="col_face">
                             <a href="/single/{{this.id}}">
                                 <img src="{{this.thumb_image}}" alt="">
@@ -22,13 +34,24 @@
                                     {{this.description}}
                                 </p>
                             </a>
-                            <ul class="col_size">
+
+
+                            <ul
+                                class="col_size {{#_if expected='Sauces' val=category}} none{{/_if}}{{#_if expected='Drinks' val=category}} none{{/_if}}">
+                                {{#if this.price_small }}
                                 <li onclick="pieSize(this,{{this.price_small}})" class="active">25см/800гр</li>
-                                <li onclick="pieSize(this,{{this.price_big}})">32см/1200гр</li>
+                                {{/if}}
+                                {{#if this.price_big }}
+                                <li onclick="pieSize(this,{{this.price_big}})" {{#if this.price_small}}
+                                    {{else}}class="active" {{/if}}>32см/1200г</li>
+                                {{/if}}
                             </ul>
+
                             <ul class="col_footer">
                                 <li>
-                                    <h3 class="col_price offer_price">{{this.price_small}} грн.</h3>
+                                    <h3 class="col_price offer_price">
+                                        {{#if this.price_small}}{{this.price_small}}{{else}}{{this.price_big}}{{/if}}
+                                        грн.</h3>
                                 </li>
                                 <li>
                                     <a href="/offer-edit/{{this.id}}" class="btn to_order">

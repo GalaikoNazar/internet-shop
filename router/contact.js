@@ -3,7 +3,7 @@ const router = Router();
 
 router.get("/contact", (req, res) => {
   res.render("contact", {
-    titlePage: "contact"
+    titlePage: "Contact"
   });
 });
 

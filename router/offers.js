@@ -31,7 +31,7 @@ router.post("/add-offer", (req, res) => {
   if (req.files) {
     Image.addOffer(req, res, null);
   } else {
-    res.redirect("/");
+    res.redirect("/add-offer");
   }
 });
 
@@ -58,6 +58,7 @@ router.get("/offer-edit/:id", (req, res) => {
       obj.offer = item[0];
       obj.titlePage = "Edit offer";
       // obj.zlupka = crypto.createHmac('sha256', 'nazargalaiko@gmail.com:Nazar ne faka:0.50:UAH:').update(password).digest('hex');
+      console.log(obj)
       res.render("editOffer", obj);
     });
   } else {

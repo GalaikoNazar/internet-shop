@@ -1,0 +1,49 @@
+{{> admin-nav }}
+<section class="cart">
+    <div class="container">
+        <h2 class="block_title">Category</h2>
+
+        <form action="/add-category" method="POST" class="form ">
+            <div class="cart_line">
+                <h2 class="block_title">
+                    Add category
+                </h2>
+                <div class="form_line contact_info">
+                    <label>
+                        <span>Title category</span>
+                        <input type="text" name="title_category">
+                    </label>
+                    <div class="line form_bottom">
+                        <button class="btn send">
+                            Оформить заказ
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+        <div class="cart_line">
+            <h2 class="block_title">
+                All categories
+            </h2>
+            {{#if category_list}}
+            {{#each category_list}}
+            <form action="/edit-category" method="POST" class="form_line contact_info category_line">
+                <input type="hidden" name="id" value="{{this.id}}">
+                <label>
+                    <input type="text" value="{{this.title_category}}" name="title_category">
+                </label>
+                <button class="btn send">
+                    Edit
+                </button>
+                <button class="btn remove" type="button"
+                    onclick="Category.remove(this,'?id={{this.id}}&title_category={{this.title_category}}')">
+                    Remove
+                </button>
+
+            </form>
+            {{/each}}
+            {{/if}}
+        </div>
+    </div>
+</section>

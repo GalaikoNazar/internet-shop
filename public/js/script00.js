@@ -74,13 +74,34 @@ class Alert {
 			}, 2000)
 		}
 	}
+	static info(text) {
+		if(document.querySelector('.general_alert')) {
+			document.querySelector('.general_alert p').innerText = text;
+			document.querySelector('.general_alert').classList.add('red');
+			setTimeout(function () {
+				document.querySelector('.general_alert').className = 'general_alert';
+			}, 2000)
+		}
+	}
 }
+class Order {
+	static  category(el) {
+		console.log(el.value)
+		let order = el.value.toLowerCase();
+		if(order == 'sauces' || order == 'drinks') {
+			el.closest('form').classList.remove('for_pizza');
+		}
+		else {
+			el.closest('form').classList.add('for_pizza');
+		}
+	}
+}
+
 
 class Offer {
 	static remove(el, info) {
 		el.closest('.col').classList.add('remove');
 		
-
 		fetch(`/offer-remove${info}`, {
 			method: "DELETE"
 		}).then(response => response.json())
@@ -100,6 +121,29 @@ class Offer {
 	}
 }
 
+class Category {
+	static remove(el, info) {
+		el.closest('.category_line').classList.add('remove');
+		console.log(info);
+		fetch(`/remove-category${info}`, {
+			method: "DELETE"
+		}).then(response => response.json())
+		.then(item => {
+			console.log(item)
+			if(item.status == 200) {
+				setTimeout(function () {
+					el.closest('.category_line').remove();
+				}, 1000);
+				Alert.green('Category removed!!!');
+			}
+			else {
+				el.closest('.col').classList.remove('remove');
+				Alert.red('Category not removed! Try again');
+			}
+		});
+		console.log(info)
+	}
+}
 
 
 function mobileMenu(el) {

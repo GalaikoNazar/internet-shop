@@ -15,9 +15,10 @@
 		}
 	}
 }
+
 section {
 	.btn {
-		&.remove_order {
+		&.remove_order, &.remove {
 			background: red;
 			margin-top: .5em;
 			&:hover {
@@ -41,6 +42,21 @@ section {
 					transform-origin: center;
 					transform: scale(.9);
 				}
+			}
+		}
+	}
+	&.cart  {
+		label span em {
+			&:before {
+				content: '('
+			}
+			&:after {
+				content: ')'
+			}
+		}
+		.cart_line  {
+			.block_title {
+				padding-left: 0;
 			}
 		}
 	}
@@ -174,6 +190,27 @@ section {
 			position: relative;
 		}
 	}
+	.form_line.category_line {
+		display: flex;
+		width: 100%;
+		transition:.4s opacity, .4s transform;
+		&.remove {
+			opacity: .6;
+			transform-origin: center;
+			transform: scale(.9);
+		}
+		label {
+			width: 100%;
+			max-width: calc(100% - 22em);
+		}
+		.btn {
+			width: 10em;
+			margin: 0 0 0 1em;
+			padding: .17em .95em;
+			height: 5.0em;
+
+		}
+	}
 }
 
 .general_alert {
@@ -203,8 +240,33 @@ section {
 		background-color: #f8d7da;
 		border-color: #f5c6cb;
 	}
+	&.info {
+		top: 5em;
+		color: #1b1e21;
+		background-color: #d6d8d9;
+		border-color: #c6c8ca;
+	}
 	p {
 		font-size: 1.7em;
 		color: inherit;
 	}
+}
+
+form {
+	.for_pizza, .form_line.for_pizza  {
+		transition:.4s opacity, .4s transform;
+		display: none;
+	}
+	&.for_pizza {
+		
+		.for_pizza {
+			display: block;
+		}
+		.form_line.for_pizza {
+			display: grid;
+		}
+	}
+}
+.none {
+	display: none !important;
 }

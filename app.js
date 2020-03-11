@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const fileUpload = require("express-fileupload");
+const handlebarsHelpers = require('./helpers/handlebars');
 app.use(
   fileUpload({
     limits: { filesize: 50 * 1024 * 1024 }
@@ -17,7 +18,8 @@ app.use(
 
 const hbs = exphbs.create({
   defaultLayout: "main",
-  extname: "hbs"
+  extname: "hbs",
+  helpers: handlebarsHelpers
 });
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
@@ -41,6 +43,7 @@ const contact = require("./router/contact");
 const delivery = require("./router/delivery");
 const kitchen = require("./router/kitchen");
 const allOffers = require("./router/offers");
+const category = require("./router/category");
 app.use(allOffers);
 app.use(kitchen);
 app.use(singleAction);
@@ -49,6 +52,7 @@ app.use(contact);
 app.use(cart);
 app.use(main);
 app.use(actions);
+app.use(category);
 
 app.listen(PORT, () => {
   console.log("Server working");

@@ -3,7 +3,7 @@ const router = Router();
 
 router.get("/delivery", (req, res) => {
   res.render("delivery", {
-    titlePage: "delivery"
+    titlePage: "Delivery"
   });
 });
 

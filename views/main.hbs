@@ -228,9 +228,17 @@
             {{#if offers}}
             {{#each offers}}
             <div class="col">
+                {{#_if expected='Hit' val=status }}
                 <div class="col_status hit">
-                    Хит!
+                    Hit
                 </div>
+                {{/_if}}
+
+                {{#_if expected='New' val=status }}
+                <div class="col_status new">
+                    New
+                </div>
+                {{/_if}}
                 <div class="col_face">
                     <a href="/single/{{this.id}}">
                         <img src="{{this.thumb_image}}" alt="">
@@ -243,13 +251,19 @@
                             {{this.description}}
                         </p>
                     </a>
-                    <ul class="col_size">
+                    <ul class="col_size {{#_if expected='Sauces' val=category}} none{{/_if}}{{#_if expected='Drinks' val=category}} none{{/_if}}">
+                        {{#if this.price_small }}
                         <li onclick="pieSize(this,{{this.price_small}})" class="active">25см/800гр</li>
-                        <li onclick="pieSize(this,{{this.price_big}})">32см/1200гр</li>
+                        {{/if}}
+                        {{#if this.price_big }}
+                        <li onclick="pieSize(this,{{this.price_big}})" {{#if this.price_small}} {{else}}class="active"
+                            {{/if}}>32см/1200г</li>
+                        {{/if}}
                     </ul>
                     <ul class="col_footer">
                         <li>
-                            <h3 class="col_price offer_price">{{this.price_small}} грн.</h3>
+                            <h3 class="col_price offer_price">
+                                {{#if this.price_small}}{{this.price_small}}{{else}}{{this.price_big}}{{/if}} грн.</h3>
                         </li>
                         <li>
                             <button class="btn to_order" onclick="toOrder(this)">
@@ -261,72 +275,6 @@
             </div>
             {{/each}}
             {{/if}}
-            {{!-- <div class="col">
-                <div class="col_status new">
-                    New
-                </div>
-                <div class="col_face">
-                    <a href="/single">
-                        <img src="/img/1c4eab1f1de6313e9ac9039651fe24c4.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col_description">
-                    <a href="/single" class="page">
-                        <h3 class="col_title">Пирог с говядиной</h3>
-                        <p class="col_text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima magnam vel fugit ullam
-                            vitae distinctio similique quaerat temporibus, dolorem molestias.
-                        </p>
-                    </a>
-                    <ul class="col_size">
-                        <li onclick="pieSize(this)" class="active">25см/800гр</li>
-                        <li onclick="pieSize(this)">32см/1200гр</li>
-                    </ul>
-                    <ul class="col_footer">
-                        <li>
-                            <h3 class="col_price">5900 руб.</h3>
-                        </li>
-                        <li>
-                            <button class="btn to_order" onclick="toOrder(this)">
-                                В корзину
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col">
-                <div class="col_status hit">
-                    Хит!
-                </div>
-                <div class="col_face">
-                    <a href="/single">
-                        <img src="/img/1c4eab1f1de6313e9ac9039651fe24c4.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col_description">
-                    <a href="/single" class="page">
-                        <h3 class="col_title">Пирог с говядиной</h3>
-                        <p class="col_text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima magnam vel fugit ullam
-                            vitae distinctio similique quaerat temporibus, dolorem molestias.
-                        </p>
-                    </a>
-                    <ul class="col_size">
-                        <li onclick="pieSize(this)" class="active">25см/800гр</li>
-                        <li onclick="pieSize(this)">32см/1200гр</li>
-                    </ul>
-                    <ul class="col_footer">
-                        <li>
-                            <h3 class="col_price">5900 руб.</h3>
-                        </li>
-                        <li>
-                            <button class="btn to_order" onclick="toOrder(this)">
-                                В корзину
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div> --}}
         </div>
         <div class="pagination">
             <a href="/" class="arrow">
