@@ -1,0 +1,102 @@
+{{> admin-nav }}
+<section class="cart">
+    <div class="container">
+        <h2 class="block_title">Кухня</h2>
+
+        <form action="/add-offer" method="POST" class="form " ref='uploadForm' encType="multipart/form-data">
+            <!-- for total price -->
+            <div class="cart_line">
+                <h2 class="block_title">
+                    Додати продукт
+                </h2>
+                <div class="form_line contact_info">
+                    <label>
+                        <span>Category</span>
+                        <select name="category">
+                            <option>Pizza</option>
+                            <option>Drinks</option>
+                            <option>Sauces</option>
+                        </select>
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <label class="upload">
+                        <img src="/img/miniStar.svg" alt="" class="review">
+                        <input type="file" name="image" onchange="Image.change(this)" required>
+                        <span class="error_text">Format must be: png, jpg, jpeg. And max size 2 mb.</span>
+                        <span class="file_name">oerend.jpg</span>
+                        <button class="btn btn-light" type="button" onclick="Image.cancel(this)">cancel</button>
+                    </label>
+                    <label>
+                        <span>Title</span>
+                        <input type="text" name="title" class="">
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <label>
+                        <span>Status</span>
+                        <select name="status">
+                            <option>Standart</option>
+                            <option>Hit</option>
+                            <option>New</option>
+                        </select>
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <hr>
+                    <div class="form_line contact_info c2">
+                        <label>
+                            <span>Type small</span>
+                            <select name="type_small">
+                                <option>25см/800г</option>
+                                <option>32см/1200г</option>
+                                <option>None</option>
+                            </select>
+                            <span class="error">Поле обязательно для заполнения</span>
+                        </label>
+                        <label>
+                            <span>Price a <big>small</big> pizza</span>
+                            <input type="text" name="price_small">
+                            <span class="error">Поле обязательно для заполнения</span>
+                        </label>
+                        <label>
+                            <span>Type big</span>
+                            <select name="type_big">
+                                <option>32см/1200г</option>
+                                <option>25см/800г</option>
+                                <option>None</option>
+                            </select>
+                            <span class="error">Поле обязательно для заполнения</span>
+                        </label>
+                        <label>
+                            <span>Price a <big>big</big> pizza </span>
+                            <input type="text" name="price_big">
+                            <span class="error">Поле обязательно для заполнения</span>
+                        </label>
+                    </div>
+                    <hr>
+                    <label>
+                        <span>Main ingredien</span>
+                        <select name="main_ingredient">
+                            <option>М'ясна</option>
+                            <option>З курятиною</option>
+                            <option>Вегетер'янська</option>
+                            <option>З рибою</option>
+                        </select>
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <label>
+                        <span>Storage </span>
+                        <textarea name="storage"></textarea>
+                    </label>
+                    <label>
+                        <span>Description</span>
+                        <textarea name="description"></textarea>
+                    </label>
+                </div>
+            </div>
+            <div class="line form_bottom">
+                <button class="btn send">
+                    Оформить заказ
+                </button>
+            </div>
+        </form>
+    </div>
+</section>

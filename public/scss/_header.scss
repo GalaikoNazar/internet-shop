@@ -1,0 +1,258 @@
+header {
+	z-index: 2;
+	display: flex;
+	background: $w;
+	position: relative;
+	align-items: flex-start;
+	box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+	@media(max-width: 992px){
+		z-index: 10;
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+	}
+
+	&.active {
+		background: #222222;
+		transition: 1s background;
+		.logo {
+			.pie {
+				fill:$w;
+			}
+		}
+		.mobile_button {
+			transform: rotate(-45deg);
+			span {
+				background: $w;
+				&:nth-child(2) {
+					margin: 0;
+					top: -2px;
+					transform: rotate(90deg);
+				}
+				&:nth-child(3) {
+					width: 0;
+				}
+			}
+		}
+		.container {
+			border-bottom: 1px solid rgba(196, 196, 196, 0.2);
+		}
+		.basket {
+			opacity: 0;
+			pointer-events: none;
+		}
+		.right {
+			right: 0;
+		}
+	}
+	.container {
+		display: -webkit-flex;
+		display: -moz-flex;
+		display: -ms-flex;
+		display: -o-flex;
+		display: flex;
+		align-items: stretch;
+		padding: 0 15px;
+		@media(max-width: 992px){
+			height: 7em;
+		}
+	}
+	.logo {
+		margin: auto 0;
+		svg {
+			display: block;
+			width: 13em;
+			@media(max-width: 992px){
+				width: 15em;
+			}
+			.pie {
+				fill:black;
+			}
+		}
+	}
+	.mobile_button {
+		border:0;
+		width: 4.5em;
+		transition:.4s;
+		cursor: pointer;
+		display: none;
+		@media(max-width: 992px){
+			display: block;
+		}
+		span {
+			width: 100%;
+			height: 3px;
+			transition:.4s;
+			display: block;
+			background: $gold;
+			position: relative;
+			&:nth-child(2) {
+				margin: 5px 0;
+			}
+			&:nth-child(3) {
+				width: 60%;
+				margin-left: auto;
+			}
+		}
+	}
+	.right {
+		@media(min-width: 992px){
+			margin: auto;
+		}
+		@media(max-width: 992px){
+			top: 7em;
+			right: -110%;
+			width: 100%;
+			z-index: 20;
+			display: flex;
+			transition:.4s;
+			position: fixed;
+			padding: 0 0 10em 0;
+			align-items: center;
+			background: #222222;
+			transition:.6s right;
+			height: calc(100% - 7em);
+		}
+	}
+	nav {
+		margin: 0 0 0 6em;
+		display: flex;
+		margin: auto 0;
+		display: -o-flex;
+		display: -ms-flex;
+		display: -moz-flex;
+		align-items: center;
+		display: -webkit-flex;
+		text-align: right;
+		@media(max-width: 992px){
+			font-size: 10px;
+			width: 100%;
+			margin: auto;
+			padding:0 3em;
+			display: block;
+			max-width: 45em;
+		}
+		.star {
+			@include w(.6,.6);
+		}
+		a {
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+			position: relative;
+			overflow: hidden;
+			margin: 0 .1em;
+			font-size: 1.6em;
+			padding: 1.5em 1.7em;
+			align-items: flex-start;
+			@media(max-width: 992px){
+				border-bottom: 1px solid rgba(196,196,196,.2);
+				padding: 1.0em 1.0em;
+				&:last-child {
+					border-bottom: 0;
+				}
+			}
+			&:after {
+				content: '';
+				width: 0;
+				height: .3em;
+				transition:.4s;
+				display: block;
+				background: $gold;
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				@media(max-width: 992px){
+					height: .1em;
+					bottom: -1px;
+					right: auto;
+					width: 0;
+				}
+			}
+			&.active, &:hover {
+				font-weight: 900;
+				color: $black;
+				@media(max-width: 992px){
+					color: $gold;
+				}
+				&:after {
+					width: 100%;
+					@media(max-width: 992px){
+						display: none;
+					}
+				}
+			}
+		}	
+	}
+	.basket {
+		position: relative;
+		@include w(2.5,2.5);
+		margin:auto 3.5em auto auto;
+		svg {
+			width: 100%;
+			height: 100%;
+			fill:black;
+		}
+		.indicator {
+			top: -10%;
+			right: -30%;
+			color:$w;
+			display: flex;
+			font-size: 1.1em;
+			background:$gold;
+			border-radius: 50%;
+			text-align: center;
+			position: absolute;
+			@include w(1.2, 1.2);
+			align-items: center;
+			justify-content: center;
+		}
+	}
+	.contact {
+		width: 100%;
+		display: flex;
+		max-width: 21.5em;
+		padding: 1em 1em 1em 2em;
+		background: $gold;
+		flex-direction: column;
+		justify-content: center;
+		&.mobile {
+			display: none;
+			@media(max-width: 992px){
+				font-size: 10px;
+				left: 0;
+				bottom: 0;
+				padding: 3em;
+				display: block;
+				max-width: 100%;
+				background: none;
+				position: absolute;
+				border-top: 1px solid rgba(196,196,196,.2);
+			}
+			h3 {
+				letter-spacing: 2px;
+			}
+			span {
+				line-height: 1.6;
+			}
+		}
+		@media(max-width: 992px){
+			display: none;
+		}
+		* {
+			color: $w;
+		}
+		h3 {
+			font-size: 1.6em;
+			font-weight: 600;
+		}
+		span {
+			font-size: 1.2em;
+		}
+	}
+}

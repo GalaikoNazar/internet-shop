@@ -1,0 +1,343 @@
+<section class="cart">
+    <div class="container">
+        <h2 class="block_title">Корзина</h2>
+        <div class="result">
+
+            <div class="line_pie " data-price="690" data-start="690">
+                <img src="/img/1b9176bef6f8948b6563ae27772ac99b.jpg" alt="">
+                <div class="inner_line">
+                    <div class="info">
+                        <h3 class="col_title">
+                            С говядиной, сыром, грибами, помидорами
+                        </h3>
+                        <div class="bottom">
+                            <span>
+                                Вес пирога
+                            </span>
+                            <p>
+                                800 грамм
+                            </p>
+                            <p>
+                                25 см
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="line_summ">
+                            <button class="minus" onclick="minus(this)"></button>
+                            <input type="text" class="indicator" name="summ" readonly value="1" />
+                            <button class="plus" onclick="plus(this)"></button>
+                        </div>
+                        <div class="line_price">
+                            <h2 class="price">690 руб.</h2>
+                            <button class="remove" onclick="remove(this)">
+                                Удалить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line_pie" data-price="690" data-start="690">
+                <img src="/img/3d37488fd125c99256407516797afb69.jpg" alt="">
+                <div class="inner_line">
+                    <div class="info">
+                        <h3 class="col_title">
+                            С говядиной, сыром, грибами, помидорами
+                        </h3>
+                        <div class="bottom">
+                            <span>
+                                Вес пирога
+                            </span>
+                            <p>
+                                800 грамм
+                            </p>
+                            <p>
+                                25 см
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="line_summ">
+                            <button class="minus" onclick="minus(this)"></button>
+                            <input type="text" class="indicator" name="summ" readonly value="1" />
+                            <button class="plus" onclick="plus(this)"></button>
+                        </div>
+                        <div class="line_price">
+                            <h2 class="price">690 руб.</h2>
+                            <button class="remove" onclick="remove(this)">
+                                Удалить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="line_total">
+                <p>
+                    Итого:
+                </p>
+                <h2 class="total">2220 руб.</h2>
+            </div>
+        </div>
+
+        <div class="cart_line more_offer">
+            <h2 class="block_title">Добавить в заказ</h2>
+            <div class="line">
+                <div class="col" data-price="100">
+                    <div class="col_face">
+                        <img src="/img/coca.png" alt="">
+                    </div>
+                    <div class="col_description">
+                        <a href="single.html" class="page">
+                            <h3 class="col_title">Кока-Кола стандарт</h3>
+
+                        </a>
+                        <ul class="col_footer">
+                            <li>
+                                <h3 class="col_price">100 руб.</h3>
+                            </li>
+                            <li>
+                                <button class="btn to_order" onclick="toOrder(this)">
+                                    В корзину
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col" data-price="100">
+                    <div class="col_face">
+                        <img src="/img/coca.png" alt="">
+                    </div>
+                    <div class="col_description">
+                        <a href="single.html" class="page">
+                            <h3 class="col_title">Кока-Кола стандарт</h3>
+
+                        </a>
+                        <ul class="col_footer">
+                            <li>
+                                <h3 class="col_price">100 руб.</h3>
+                            </li>
+                            <li>
+                                <button class="btn to_order" onclick="toOrder(this)">
+                                    В корзину
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col" data-price="100">
+                    <div class="col_face">
+                        <img src="/img/coca.png" alt="">
+                    </div>
+                    <div class="col_description">
+                        <a href="single.html" class="page">
+                            <h3 class="col_title">Кока-Кола стандарт</h3>
+
+                        </a>
+                        <ul class="col_footer">
+                            <li>
+                                <h3 class="col_price">100 руб.</h3>
+                            </li>
+                            <li>
+                                <button class="btn to_order" onclick="toOrder(this)">
+                                    В корзину
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col" data-price="100">
+                    <div class="col_face">
+                        <img src="/img/coca.png" alt="">
+                    </div>
+                    <div class="col_description">
+                        <a href="single.html" class="page">
+                            <h3 class="col_title">Кока-Кола стандарт</h3>
+
+                        </a>
+                        <ul class="col_footer">
+                            <li>
+                                <h3 class="col_price">100 руб.</h3>
+                            </li>
+                            <li>
+                                <button class="btn to_order" onclick="toOrder(this)">
+                                    В корзину
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form action="" class="form">
+            <!-- for total price -->
+            <input type="hidden" name="total_price" value="">
+
+            <div class="cart_line">
+                <h2 class="block_title">
+                    Контактная информация
+                </h2>
+                <div class="form_line contact_info c3">
+                    <label>
+                        <span>Имя *</span>
+                        <input type="text" name="name" class="required">
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <label>
+                        <span>Номер телефона *</span>
+                        <input type="text" name="phone" class="required">
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <label>
+                        <span>Email</span>
+                        <input type="Email" name="Email">
+                    </label>
+                </div>
+            </div>
+            <div class="cart_line">
+                <h2 class="block_title">
+                    Контактная информация
+                </h2>
+                <div class="form_line custom">
+                    <label>
+                        <span>Улица *</span>
+                        <input type="text" name="street" class="required" />
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <label>
+                        <span>Номер дома *</span>
+                        <input type="text" name="home_number" class="required">
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <label>
+                        <span>Корпус / Строение</span>
+                        <input type="text" name="corps">
+                    </label>
+                    <label>
+                        <span>Подъезд</span>
+                        <input type="text" name="entrance">
+                    </label>
+                </div>
+                <div class="form_line c3">
+                    <label>
+                        <span>Этаж</span>
+                        <input type="text" name="floor" />
+                    </label>
+                    <label>
+                        <span>Квартира *</span>
+                        <input type="text" name="apartment" class="required">
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <label>
+                        <span>Код домафон</span>
+                        <input type="number" name="code">
+                    </label>
+                </div>
+            </div>
+            <div class="cart_line">
+                <h2 class="block_title">
+                    Оплата
+                </h2>
+
+                <div class="type_payment c3">
+                    <label>
+                        <span class="radio">
+                            <input type="radio" checked name="payment">
+                            <span></span>
+                        </span>
+                        <span>Оплата наличными при получении</span>
+                    </label>
+                    <label>
+                        <span class="radio">
+                            <input type="radio" name="payment">
+                            <span></span>
+                        </span>
+                        <span>Оплата картой при получении</span>
+                    </label>
+                    <label>
+                        <span class="radio">
+                            <input type="radio" name="payment">
+                            <span></span>
+                        </span>
+                        <span>Оплата онлайн</span>
+                    </label>
+                </div>
+
+                <div class="form_line none">
+                    <label class="surrender">
+                        <span>Сдача с</span>
+                        <input type="text" name="surrender" />
+                    </label>
+                    <label class="comment">
+                        <span>Комментарий к заказу</span>
+                        <textarea></textarea>
+                    </label>
+                </div>
+            </div>
+            <div class="line form_bottom">
+                <p>
+                    Нажимая "Заказать", Вы даёте
+                    <a href="index.html">Согласие</a> на обработку
+                    Ваших персональныхданных и принимаете
+                    <a href="index.html">Пользовательское соглашение</a>
+                </p>
+                <button class="btn send" type="button">
+                    Оформить заказ
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<section class="modal_window ">
+    <div class="overlay" onclick="closeModal(this)"></div>
+    <div class="modal">
+        <div class="close" onclick="closeModal(this)">
+            <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M8.36754 7.99497L13.8729 2.48965C14.2149 2.1479 14.2149 1.5934 13.8729 1.25165C13.5308 0.909607 12.9769 0.909607 12.6349 1.25165L7.12954 6.75697L1.62392 1.25165C1.28188 0.909607 0.727965 0.909607 0.385925 1.25165C0.0438845 1.5934 0.0438845 2.1479 0.385925 2.48965L5.89154 7.99497L0.385925 13.5003C0.0438845 13.842 0.0438845 14.3965 0.385925 14.7383C0.556945 14.909 0.78108 14.9945 1.00492 14.9945C1.22877 14.9945 1.4529 14.909 1.62392 14.738L7.12954 9.23268L12.6349 14.738C12.8059 14.909 13.03 14.9945 13.2539 14.9945C13.4777 14.9945 13.7018 14.909 13.8729 14.738C14.2149 14.3963 14.2149 13.8418 13.8729 13.5L8.36754 7.99497Z" />
+            </svg>
+        </div>
+
+        <div class="modal_body">
+            <div class="show info">
+                <div class="icon">
+                    <svg viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0)">
+                            <path
+                                d="M41.2329 51.0656L40.4365 54.3212C38.0472 55.2643 36.1386 55.982 34.7174 56.4755C33.2947 56.9706 31.6415 57.2168 29.758 57.2168C26.8655 57.2168 24.6157 56.5082 23.0111 55.1008C21.4065 53.6878 20.6039 51.8972 20.6039 49.7251C20.6039 48.8842 20.6622 48.0193 20.7832 47.1381C20.9053 46.2558 21.0995 45.2622 21.3651 44.1516L24.3511 33.583C24.6167 32.571 24.8425 31.6121 25.0234 30.7053C25.2068 29.8042 25.2951 28.975 25.2951 28.2287C25.2951 26.879 25.0157 25.9349 24.4594 25.4041C23.903 24.8749 22.8415 24.6062 21.2655 24.6062C20.4936 24.6062 19.7002 24.7298 18.8915 24.9689C18.0793 25.209 17.385 25.4409 16.8021 25.6565L17.6006 22.3982C19.5567 21.6018 21.4264 20.9198 23.2149 20.3538C25.0034 19.7862 26.6934 19.5022 28.2918 19.5022C31.1644 19.5022 33.381 20.1965 34.9376 21.585C36.4942 22.9745 37.2722 24.7758 37.2722 26.9955C37.2722 27.4547 37.2211 28.2639 37.1113 29.4205C37.004 30.5796 36.8043 31.6417 36.5131 32.6077L33.5399 43.134C33.2962 43.9794 33.077 44.946 32.8865 46.0336C32.6898 47.1141 32.5958 47.9396 32.5958 48.4934C32.5958 49.8911 32.9074 50.8454 33.5322 51.3527C34.1616 51.8599 35.2456 52.1123 36.7854 52.1123C37.5082 52.1123 38.3307 51.9841 39.2446 51.7322C40.156 51.4804 40.8206 51.2592 41.2329 51.0656ZM41.9869 6.87328C41.9869 8.70726 41.2957 10.2735 39.9067 11.5614C38.5212 12.8539 36.8518 13.5006 34.8988 13.5006C32.9396 13.5006 31.266 12.8539 29.8648 11.5614C28.466 10.273 27.7651 8.70726 27.7651 6.87328C27.7651 5.04287 28.466 3.47403 29.8648 2.16981C31.2635 0.86763 32.9401 0.216797 34.8988 0.216797C36.8513 0.216797 38.5212 0.869162 39.9067 2.16981C41.2967 3.47403 41.9869 5.04338 41.9869 6.87328Z" />
+                        </g>
+                    </svg>
+                </div>
+                <h2>
+                    Минимальная сумма заказа на доставку - 700 руб.
+                </h2>
+                <button class="btn" onclick="closeModal(this)">
+                    Хорошо
+                </button>
+            </div>
+
+            <div class="add_offer show">
+                <h2>Добавить Соса-Сola в заказ</h2>
+                <img src="/img/coca2.jpg" alt="">
+                <div class="ask">
+                    <button class="btn " onclick="closeModal(this)">
+                        Да
+                    </button>
+                    <button class="btn clear" onclick="closeModal(this)">
+                        Нет, спасибо
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+{{!-- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores quam consequuntur iusto vero. A dicta assumenda corporis, laborum vitae voluptate! --}}

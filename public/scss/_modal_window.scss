@@ -1,0 +1,162 @@
+section {
+	&.modal_window {
+		top: 0;
+		left: 0;
+		width: 100%;
+		@include fb;
+		z-index: 100;
+		height: 100%;
+		padding: 5em;
+		position: fixed;
+		opacity: 0;
+		pointer-events: none;
+		@media(max-width: 550px){
+			padding: 3em;
+		}
+		@media(max-width: 400px){
+			font-size: 6px;
+		}
+		&.active {
+			opacity: 1;
+			pointer-events: auto;
+			.overlay {
+				opacity: 1;
+			}
+			.modal {
+				left: 0;
+				transition-delay: .5s;
+			}
+		}
+		&.info {
+			.info {
+				display: block;
+			}
+		}
+		&.add_offer {
+			.add_offer {
+				display: block;
+			}
+		}
+		.overlay {
+			@include abs;
+			opacity: 0;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+			display: block;
+			cursor: pointer;
+			transition: .7s;
+			background: rgba(39, 39, 39, 0.57);
+		}
+		.close {
+			right: -2em;
+			top: -2em;
+			z-index: 3;
+			@include fb;
+			background: $w;
+			cursor: pointer;
+			@include w(6,6);
+			overflow: hidden;
+			position: absolute;
+			border-radius: 50%;
+			border: 1px solid #9F9F9F;
+			svg {
+				width: 30%;
+				height: 30%;
+				@include abs;
+				fill: #9F9F9F;
+				display: block;
+			}
+			&:active {
+				border-color: $gold;
+				svg {
+					fill:$gold;
+				}
+			}
+		}
+		.modal {
+			left: -100%;
+			z-index: 2;
+			width: 100%;
+			margin: auto;
+			padding: 5em;
+			background: $w;
+			max-width: 63em;
+			transition: .4s;
+			position: relative;
+			border-radius: .5em;
+			&_body {
+				width: 100%;
+				margin: auto;
+				max-width: 40em;
+			}
+			@media(max-width: 400px){
+				padding:4em 2em;
+			}
+		}
+		.info {
+			text-align: center;
+			.icon {
+				@include fb;
+				margin:0  auto 3em;
+				@include w(10,10);
+				border-radius: 50%;
+				background: #F4F4F4;
+				svg  {
+					fill:$gold;
+					width: 60%;
+					height: 60%;
+				}
+			}
+			h2 {
+				color:$black;
+				font-size: 2.5em;
+				font-weight: 500;
+				line-height: 1.4;
+			}
+			.btn {
+				width: 100%;
+				font-size: 2em;
+				margin-top: 2em;
+			}
+		}
+		.add_offer {
+			text-align: center;
+			h2 {
+				color: #1F1F1F;
+				font-size: 2.6em;
+				font-family: $bold;
+				line-height: 1.1;
+			}
+			img {
+				width: 26em;
+				display: block;
+				margin: 3em auto;
+			}
+			.btn {
+				font-size: 2em;
+				width: 50%;
+			}
+		}
+		.ask {
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+			align-items: center;
+			.btn {
+				white-space: nowrap;
+				&:first-child {
+					margin-right: .9em;
+				}
+				&:last-child {
+					margin-left: .9em;
+				}
+			}
+		}
+		.show {
+			display: none;
+		}
+	}
+}

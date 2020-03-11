@@ -1,0 +1,36 @@
+section {
+	&.info {
+		min-height: 100vh;
+		width: 100%;
+		@include fb;
+		.container {
+			text-align: center;
+		}
+		svg {
+			@include w(8,8);
+			display: block;
+			margin: 0 auto 3em;
+		}
+		.text {
+			font-size: 2.4em;
+			display: block;
+			line-height: 1.45;
+			text-align: center;
+			color: #444444;
+			margin-bottom: 1em;
+			b {
+				margin: 0;
+				color: #444444;
+				font-size: 136%;
+				display: inline;
+				font-family: $bold;
+			}
+			&:last-child {
+				margin-bottom: 0;
+			}
+			&.bold {
+				font-family: $bold;
+			}
+		}
+	}
+}

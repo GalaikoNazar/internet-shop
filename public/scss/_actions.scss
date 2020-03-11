@@ -1,0 +1,67 @@
+section {
+	&.actions {
+		padding: 3em 0 10em;
+		.block_title {
+			text-align: left;
+		}
+		.wrap {
+			padding-top: 3em;
+			display: grid;
+			grid-template-columns: repeat(auto-fill,minmax(55em,1fr));
+			grid-gap: 3em;
+			@media(max-width: 1180px){
+				grid-template-columns: repeat(auto-fill,minmax(45em,1fr));
+			}
+			@media(max-width: 890px){
+				display: block;
+			}
+		}
+		.col {
+			@media(max-width: 890px){
+				margin-bottom: 2em;
+			}
+			@media(max-width: 560px){
+				display: block;
+			}
+			&_face {
+				height: 30em;
+				@media(max-width: 890px){
+					height: auto;
+				}
+				@media(max-width: 560px){
+					width: 100%;
+				}
+			}
+			&_title {
+				font-size: 2.4em;
+				font-family: $bold;
+			}
+			&_description {
+				padding: 0 2.5em 2.5em 2.5em;
+				@media(max-width: 560px){
+					width: 100%;
+				}
+			}
+			&_text {
+				display: -webkit-box;
+				-webkit-line-clamp: 4;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+				font-size: 1.6em;
+				line-height: 24px;
+			}
+			.btn {
+				width: auto;
+				margin-top: 1em;
+				display: inline-block;
+				font-size: 1.6em;
+				padding: .617em 2.95em;
+				@media(max-width: 992px){
+					color: $w;
+					background: $gold;
+					border-color: $gold;
+				}
+			}
+		}
+	}
+}

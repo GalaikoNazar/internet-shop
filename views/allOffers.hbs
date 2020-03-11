@@ -1,0 +1,53 @@
+{{> admin-nav }}
+<section class="cart">
+    <div class="container">
+        <h2 class="block_title">All offers</h2>
+
+        <section class="menu">
+            <div class="container">
+
+                <div class="wrap">
+                    {{#if offers}}
+                    {{#each offers}}
+                    <div class="col">
+                        <div class="col_face">
+                            <a href="/single/{{this.id}}">
+                                <img src="{{this.thumb_image}}" alt="">
+                            </a>
+                        </div>
+                        <div class="col_description offer_wrap">
+                            <a href="/single/{{this.id}}" class="page">
+                                <h3 class="col_title">{{this.title}}</h3>
+                                <p class="col_text">
+                                    {{this.description}}
+                                </p>
+                            </a>
+                            <ul class="col_size">
+                                <li onclick="pieSize(this,{{this.price_small}})" class="active">25см/800гр</li>
+                                <li onclick="pieSize(this,{{this.price_big}})">32см/1200гр</li>
+                            </ul>
+                            <ul class="col_footer">
+                                <li>
+                                    <h3 class="col_price offer_price">{{this.price_small}} грн.</h3>
+                                </li>
+                                <li>
+                                    <a href="/offer-edit/{{this.id}}" class="btn to_order">
+                                        Edit
+                                    </a>
+                                    <button
+                                        onclick="Offer.remove(this,'?id={{this.id}}&image={{this.image}}&thumb={{this.thumb_image}}')"
+                                        class="btn remove_order">
+                                        Remove
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{/if}}
+                </div>
+            </div>
+        </section>
+
+    </div>
+</section>

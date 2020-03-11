@@ -1,0 +1,83 @@
+<section class="contact">
+	<div class="container">
+		<h2 class="block_title">
+			Контакт
+		</h2>
+
+		<div class="wrap">
+			<div class="col">
+				<div class="col_upper">
+
+					<h2 class="col_title">
+						Адрес
+					</h2>
+				</div>
+
+				<p>
+					г. Lorem, ул. Ipsume, 21
+				</p>
+			</div>
+			<div class="col">
+				<div class="col_upper">
+
+					<h2 class="col_title">
+						Телефон
+					</h2>
+				</div>
+
+				<p>
+					+ 380 (99) 666 99 66
+				</p>
+			</div>
+			<div class="col">
+				<div class="col_upper">
+
+					<h2 class="col_title">
+						Email
+					</h2>
+				</div>
+				<p>
+					test@gmail.com
+				</p>
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<section class="callback">
+	<div class="container">
+		<h2 class="block_title">
+			Форма связи
+		</h2>
+		<form action="" class="form" mathod="POST">
+			<div class="line upper">
+				<div class="left">
+					<input type="text" name="name" class="required" placeholder="Имя *">
+					<div class="select theme" onclick="selectToggle(this)">
+						<input type="text" readonly class="indicator require" placeholder="Тема">
+						<ul class="list" onmouseleave="selectHide(this)">
+							<li onclick="choosePie(this)">Обслуживание клиентов</li>
+							<li onclick="choosePie(this)">Техническая поддержка</li>
+							<li onclick="choosePie(this)">Общая помощь</li>
+
+						</ul>
+					</div>
+				</div>
+				<textarea name="comment" class="require" placeholder="Опишите суть вопроса, ситуации"></textarea>
+			</div>
+
+			<div class="line form_bottom">
+				<p>
+					Нажимая "Заказать", Вы даёте
+					<a href="index.html">Согласие</a> на обработку
+					Ваших персональныхданных и принимаете
+					<a href="index.html">Пользовательское соглашение</a>
+				</p>
+				<button class="btn send" type="button">
+					Отправить
+				</button>
+			</div>
+		</form>
+	</div>
+</section>

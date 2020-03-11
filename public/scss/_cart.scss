@@ -1,0 +1,356 @@
+section {
+	&.cart {
+		padding: 3em 0 10em;
+		.container {
+			@media(max-width: 550px){
+				padding: 0;
+			}
+		}
+		.block_title {
+			text-align: left;
+			padding: 0 15px;
+		}
+		
+		.result {
+			padding-top: 3em;
+			max-height: 100%;
+			overflow: visible;
+			.block_title {
+				padding-left: 0;
+				padding-right: 0;
+			}
+			@media(max-width: 450px){
+				font-size: 9px;
+			}
+		}
+		.line_pie {
+			padding: 3em;
+			position: relative;
+			background: #FFFFFF;
+			box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.05);
+			@media(max-width: 768px){
+				align-items: stretch;
+				img {
+					object-fit: cover;
+					width: 18em;
+				}
+			}
+			@media(max-width: 450px){
+				// align-items: flex-start;
+				padding: 2em;
+				img {
+					width: 15em;
+					max-height: 18em;
+				}
+			}
+			.inner_line {
+				display: -webkit-flex;
+				display: -moz-flex;
+				display: -ms-flex;
+				display: -o-flex;
+				display: flex;
+				align-items: center;
+				width: calc(100%  - 15em);
+				@media(max-width: 768px){
+					display: block;
+				}
+			}
+			.right {
+				display: -webkit-flex;
+				display: -moz-flex;
+				display: -ms-flex;
+				display: -o-flex;
+				display: flex;
+				align-items: center;
+				width: calc(100%  - 35em);
+				@media(max-width: 768px){
+					width: 100%;
+					padding: 1em 0 0 3em ;
+				}
+				@media(max-width: 450px){
+					padding-left: 1.5em;
+					margin-top: auto;
+				}
+			}
+			.info {
+				max-width: 35em;
+				@media(max-width: 450px){
+					padding-left: 1.5em;
+				}
+			}
+			.line_price {
+				margin-left: auto;
+				text-align: right;
+			}
+			.price {
+				color: #1F1F1F;
+				display: block;
+				font-size: 28px;
+				font-size: 2.2em;
+				font-family: $bold;
+				text-align: right;
+				margin-bottom: 1em;
+				display: block;
+				min-width: 6em;
+
+				@media(max-width: 768px){
+					margin: 0;
+				}
+				@media(max-width: 450px){
+					font-size: 1.8em;
+				}
+			}
+			.remove {
+				border:0;
+				color: $gold;
+				cursor: pointer;
+				font-size: 1.4em;
+				margin-left: auto;
+				display: inline-block;
+				@media(max-width: 768px){
+					top: 1em;
+					right: 1em;
+					z-index: 2;
+					display: block;
+					cursor: pointer;
+					font-size: inherit;
+					position: absolute;
+					color: transparent;
+					@include w(2.5,2.5);
+					&:before {
+						content: '';
+						width: 100%;
+						height: 2px;
+						@include abs;
+						display: block;
+						background: #9F9F9F;
+						transform:rotate(45deg);
+						transform-origin: center;
+					}
+					&:after {
+						content: '';
+						width: 100%;
+						height: 2px;
+						display: block;
+						background: #9F9F9F;
+						@include abs;
+						transform-origin: center;
+						transform:rotate(-45deg);
+					}
+				}
+
+			}
+		}
+		.line_total {
+			padding: 1em 4em 0;
+			text-align: right;
+			p {
+				display: inline;
+				color: #444444;
+				font-weight: 500;
+				font-size: 2.4em;
+				line-height: 22px;
+				padding-right: 5px;
+			}
+			.total {
+				color: #1f1f1f;
+				display: inline;
+				font-size: 28px;
+				font-size: 2.2em;
+				font-family:$bold;
+				text-align: right;
+				margin-bottom: 1em;
+			}
+		}
+		textarea {
+			margin: 0;
+			height: 12.5em;
+		}
+		.surrender {
+			width: 100%;
+			display: block;
+			max-width: 37em;
+			margin-bottom: 2em;
+			@media(max-width: 768px){
+				display: none;
+			}
+		}
+		.c4 {
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			@media(max-width: 768px){
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+		.c3 {
+			grid-template-columns: 1fr 1fr 1fr;
+			@media(max-width: 768px){
+				display: block;
+			}
+		}
+		.c2 {
+			grid-template-columns: 1fr 1fr;
+		}
+		label {
+			span {
+				color: #6C6C6C;
+				display: block;
+				font-size: 1.6em;
+				line-height: 18px;
+				margin: 0 0 0.8em 0;
+			}
+			&.comment{
+				span {
+					color: $gold;
+					font-size: 1.4em;
+					line-height: 18px;
+				}
+			}
+		}
+		.form {
+			&_line {
+				display: grid;
+				grid-gap: 2em;
+				padding: 0 0 2em;
+				&.none {
+					display: block;
+				}
+				
+				textarea {
+					width: 100%;
+				}
+				&.custom {
+					grid-template-columns: 1fr 17em 17em 1fr;
+					@media(max-width: 768px){
+						grid-template-columns: 1fr 1fr;
+					}
+
+				}
+				
+			}
+		}
+		.type_payment {
+			display: grid;
+			grid-gap:4em;
+			margin-bottom: 4em;
+			span {
+				margin: 0;
+			}
+			label {
+				display: -webkit-flex;
+				display: -moz-flex;
+				display: -ms-flex;
+				display: -o-flex;
+				display: flex;
+				align-items: center;
+				@media(max-width: 768px){
+					margin-bottom: 2em;
+				}
+
+			}
+			.radio {
+				padding: 0;
+				cursor: pointer;
+				margin: 0 2em 0 0;
+				font-size: inherit;
+				position: relative;
+				border-radius: 50%;
+				@include br($gold);
+				@include w(2.5,2.5);
+				input {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					display: block;
+					opacity: 0;
+					cursor: pointer;
+					& ~ span {
+						z-index: 2;
+						width: 35%;
+						height: 35%;
+						@include abs;
+						display: block;
+						transition: .4s;
+						background: $gold;
+						border-radius: 50%;
+						transform: scale(.01);
+						transform-origin: center;
+					}
+					&:checked {
+						& ~ span {
+							transform: scale(1);
+						}
+					}
+				}
+			}
+		}
+		.cart_line {
+			background: $w;
+			margin-top: 3em;
+			padding: 3em 3em 0;
+			box-shadow: 0 4px 25px rgba(0,0,0,.05);
+			margin-bottom: 4em;
+			.block_title{
+				font-size: 2.4em;
+				line-height: 38px;
+				display: block;
+				padding-bottom: .9em;
+			}
+			&.more_offer {
+				a {
+					pointer-events: none;
+				}
+				.line {
+					width: 100%;
+					display: flex;
+					overflow: auto;
+					align-items: stretch;
+					padding:0 0 2em ;
+					margin-bottom: 2em;
+					&::-webkit-scrollbar {
+						width: 7px;
+						height: 7px;
+					}
+
+					&::-webkit-scrollbar-track {
+
+					}
+
+					&::-webkit-scrollbar-thumb {
+						background:transparent;
+						border-radius: 5px;
+					}
+				}
+			}
+			
+			.col {
+				display: flex;
+				min-width: 40em;
+				margin-right: 2em;
+				border: 1px solid #F0F0F0;
+				&:hover {
+					box-shadow: none;
+				}
+				&.title {
+					line-height: 16px;
+					display: -webkit-box;
+					-webkit-line-clamp: 3;
+					-webkit-box-orient: vertical;
+					overflow: hidden;
+				}
+				&_face {
+					width: 35%;
+					height: auto;
+				}
+				&_description {
+					padding: 0 2em 0em 2em;
+					width: 65%;
+				}
+			}
+		}
+		.form_bottom {
+			@media(max-width: 768px){
+				padding: 0em 2em;
+			}
+		}
+	}
+}
