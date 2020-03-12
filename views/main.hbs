@@ -1,10 +1,12 @@
+{{#if slider_list}}
 <section class="banner">
+    {{#each slider_list}}
     <div class="slide">
-        <img src="/img/banner.png" class="back_fon" alt="">
+        <img data-lazy="{{this.image}}" class="back_fon" alt="{{this.title}}">
         <div class="container">
             <div class="present">
                 <h1 class="present_title">
-                    Сладкий вишневый пирог "Сherry"
+                    {{this.title}}
                 </h1>
 
                 <ul class="present_dots">
@@ -15,39 +17,9 @@
             </div>
         </div>
     </div>
-    <div class="slide">
-        <img src="/img/1b9176bef6f8948b6563ae27772ac99b.jpg" class="back_fon" alt="">
-        <div class="container">
-            <div class="present">
-                <h1 class="present_title">
-                    Сладкий вишневый пирог "Сherry"
-                </h1>
-
-                <ul class="present_dots">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="slide">
-        <img src="/img/025ad9a05596515e7a8d20b31682589e.jpg" class="back_fon" alt="">
-        <div class="container">
-            <div class="present">
-                <h1 class="present_title">
-                    Сладкий вишневый пирог "Сherry"
-                </h1>
-
-                <ul class="present_dots">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    {{/each}}
 </section>
+{{/if}}
 
 <section class="filter">
     <ul class="container">
@@ -251,7 +223,8 @@
                             {{this.description}}
                         </p>
                     </a>
-                    <ul class="col_size {{#_if expected='Sauces' val=category}} none{{/_if}}{{#_if expected='Drinks' val=category}} none{{/_if}}">
+                    <ul
+                        class="col_size {{#_if expected='Sauces' val=category}} none{{/_if}}{{#_if expected='Drinks' val=category}} none{{/_if}}">
                         {{#if this.price_small }}
                         <li onclick="pieSize(this,{{this.price_small}})" class="active">25см/800гр</li>
                         {{/if}}

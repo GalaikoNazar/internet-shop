@@ -1,5 +1,4 @@
 const { connection } = require("../config");
-
 connection.connect(function(err) {
   if (err) {
     return console.error("Ошибка: " + err.message);
@@ -153,5 +152,123 @@ class Category {
   }
 }
 
+class Ingredient {
+  static async add(el) {
+    const sql = `INSERT INTO ingredient(title_ingredient) VALUES("${el.title_ingredient}")`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        console.log("Data post, saved");
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async get() {
+    const sql = `SELECT * FROM ingredient`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async remove(id) {
+    const sql = `DELETE FROM ingredient WHERE id="${id}"`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async edit(el) {
+    const sql = `UPDATE ingredient SET title_ingredient="${el.title_ingredient}" WHERE id="${el.id}"`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+}
+
+class Slide {
+  static async add(el) {
+    const sql = `INSERT INTO banner(title, image, thumb_image) VALUES("${el.title}", "${el.image}", "${el.thumb_image}")`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        console.log("Data post, saved");
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async get() {
+    const sql = `SELECT * FROM banner`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async getCurrent(id) {
+    const sql = `SELECT * FROM banner WHERE id="${id}"`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async remove(id) {
+    const sql = `DELETE FROM banner WHERE id="${id}"`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async edit(el) {
+    const sql = `UPDATE banner SET title="${el.title}", image="${el.image}", thumb_image="${el.thumb_image}"  WHERE id="${el.id}"`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+}
+
 module.exports.Offer = Offer;
+module.exports.Slide = Slide;
 module.exports.Category = Category;
+module.exports.Ingredient = Ingredient;

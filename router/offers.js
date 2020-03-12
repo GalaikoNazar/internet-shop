@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { Offer } = require("../database");
+const { Offer, Category } = require("../database");
 const { Image } = require("../helpers");
 
 router.get("/all-offers", (req, res) => {
@@ -11,7 +11,6 @@ router.get("/all-offers", (req, res) => {
     res.render("allOffers", obj);
   });
 });
-
 router.get("/single/:id", (req, res) => {
   let obj = {};
   Offer.getCurrent(req.params.id).then(item => {
@@ -24,7 +23,12 @@ router.get("/single/:id", (req, res) => {
 
 //----------------------CRUD
 router.get("/add-offer", (req, res) => {
-  res.redirect("/kitchen");
+  Category.get().then(cat => {
+    res.render("offer-add", {
+      titlePage: "Add new offer",
+      category_list: cat
+    });
+  });
 });
 // add offer
 router.post("/add-offer", (req, res) => {
@@ -34,7 +38,6 @@ router.post("/add-offer", (req, res) => {
     res.redirect("/add-offer");
   }
 });
-
 router.post("/edit-offer", (req, res) => {
   if (req.files) {
     Image.addOffer(req, res, "/edit-offer");
@@ -50,22 +53,21 @@ router.post("/edit-offer", (req, res) => {
 router.get("/offer-edit", (req, res) => {
   res.redirect("/all-offers");
 });
-
 router.get("/offer-edit/:id", (req, res) => {
   let obj = {};
   if (req.params.id) {
     Offer.getCurrent(req.params.id).then(item => {
       obj.offer = item[0];
       obj.titlePage = "Edit offer";
-      // obj.zlupka = crypto.createHmac('sha256', 'nazargalaiko@gmail.com:Nazar ne faka:0.50:UAH:').update(password).digest('hex');
-      console.log(obj)
-      res.render("editOffer", obj);
+      Category.get().then(cat => {
+        obj.category_list = cat;
+        res.render("offer-edit", obj);
+      });
     });
   } else {
     res.redirect("/all-offers");
   }
 });
-
 router.delete("/offer-remove", (req, res) => {
   Offer.remove(req.query.id).then(item => {
     if (item.affectedRows) {

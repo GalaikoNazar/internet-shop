@@ -1,45 +1,41 @@
 {{> admin-nav }}
+
 <section class="cart">
     <div class="container">
         <h2 class="block_title">Кухня</h2>
-
-        <form action="/edit-offer" method="POST" class="form " ref='uploadForm' encType="multipart/form-data">
-            <input type="hidden" name="id" value="{{offer.id}}">
+        <form action="/add-offer" method="POST" class="form for_pizza" ref='uploadForm' encType="multipart/form-data">
+            <!-- for total price -->
             <div class="cart_line">
                 <h2 class="block_title">
-                    Edit offer
+                    Додати продукт
                 </h2>
-                <label>
-                    <span>Category <em>{{offer.category}}</em></span>
-                    <select name="category" value="{{offer.category}}" onchange="Order.category(this)">
-                        <option>Pizza</option>
-                        <option>Drinks</option>
-                        <option>Sauces</option>
-                    </select>
-                    <span class="error">Поле обязательно для заполнения</span>
-                </label>
                 <div class="form_line contact_info">
-                    <img src="{{image}}" class="current_image" alt="">
-                    <input type="hidden" name="current_image" value="{{offer.image}}">
-                    <input type="hidden" name="current_thumb_image" value="{{offer.thumb_image}}">
-                    <label class="upload">
-                        {{#if offer.image}}
-                        <img src="{{offer.image}}" class="current_image" alt="">
+                    <label>
+                        <span>Category</span>
+                        {{#if category_list}}
+                        <select name="category" onchange="Order.category(this)">
+                            {{#each category_list}}
+                            <option>{{this.title_category}}</option>
+                            {{/each}}
+                        </select>
                         {{/if}}
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <label class="upload">
                         <img src="/img/miniStar.svg" alt="" class="review">
-                        <input type="file" name="image" onchange="Image.change(this)">
-                        <span class="error_text">Format must be: png, jpg, jpeg. And max size 2 mb.</span>
-                        <span class="file_name">oerend.jpg</span>
+                        <input type="file" name="image" onchange="Image.change(this)" required>
+                        <span class="error_text">Format must be: png, jpg, jpeg. And max size 5 mb.</span>
+                        <span class="file_name"></span>
                         <button class="btn btn-light" type="button" onclick="Image.cancel(this)">cancel</button>
                     </label>
                     <label>
                         <span>Title</span>
-                        <input type="text" name="title" value="{{offer.title}}">
+                        <input type="text"  name="title" class="">
                         <span class="error">Поле обязательно для заполнения</span>
                     </label>
                     <label>
-                        <span>Status <em>{{offer.status}}</em></span>
-                        <select name="status" value="{{offer.status}}">
+                        <span>Status</span>
+                        <select name="status">
                             <option>Standart</option>
                             <option>Hit</option>
                             <option>New</option>
@@ -47,40 +43,40 @@
                         <span class="error">Поле обязательно для заполнения</span>
                     </label>
                     <hr>
-                    <div class="form_line contact_info c2">
-                        <label>
-                            <span>Type small <em>{{offer.type_small}}</em></span>
-                            <select name="type_small" value="{{offer.type_small}}">
+                    <div class="form_line contact_info c2 ">
+                        <label class="for_pizza">
+                            <span>Type small</span>
+                            <select name="type_small">
                                 <option>25см/800г</option>
                                 <option>32см/1200г</option>
-                                <option value="">None</option>
+                                <option>None</option>
                             </select>
                             <span class="error">Поле обязательно для заполнения</span>
                         </label>
                         <label>
                             <span>Price a <big>small</big> pizza</span>
-                            <input type="text" name="price_small" value="{{offer.price_small}}">
+                            <input type="text" name="price_small">
                             <span class="error">Поле обязательно для заполнения</span>
                         </label>
-                        <label>
-                            <span>Type big <em>{{offer.type_big}}</em></span>
-                            <select name="type_big" value="{{offer.type_big}}">
+                        <label class="for_pizza">
+                            <span>Type big</span>
+                            <select name="type_big">
                                 <option>32см/1200г</option>
                                 <option>25см/800г</option>
-                                <option value="">None</option>
+                                <option>None</option>
                             </select>
                             <span class="error">Поле обязательно для заполнения</span>
                         </label>
-                        <label>
+                        <label class="for_pizza">
                             <span>Price a <big>big</big> pizza </span>
-                            <input type="text" name="price_big" value="{{offer.price_big}}">
+                            <input type="text" name="price_big">
                             <span class="error">Поле обязательно для заполнения</span>
                         </label>
                     </div>
                     <hr>
-                    <label>
-                        <span>Main ingredient <em>{{offer.main_ingredient}}</em></span>
-                        <select name="main_ingredient" value="{{offer.main_ingredient}}">
+                    <label class="for_pizza">
+                        <span>Main ingredien</span>
+                        <select name="main_ingredient">
                             <option>М'ясна</option>
                             <option>З курятиною</option>
                             <option>Вегетер'янська</option>
@@ -90,11 +86,11 @@
                     </label>
                     <label>
                         <span>Storage </span>
-                        <textarea name="storage">{{offer.storage}}</textarea>
+                        <textarea name="storage"></textarea>
                     </label>
                     <label>
                         <span>Description</span>
-                        <textarea name="description">{{offer.description}}</textarea>
+                        <textarea name="description"></textarea>
                     </label>
                 </div>
             </div>

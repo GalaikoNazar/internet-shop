@@ -1,14 +1,14 @@
 // const sharp = require("sharp");
 const fs = require("fs");
 const sharp = require("sharp");
-const { Offer } = require("../database");
+const { Offer, Slide } = require("../database");
 var bg = require("gulp-util");
 
 class Image {
   static addOffer(req, res, route) {
     if (!req.files || Object.keys(req.files).length === 0) {
       console.log("(up) Photo not uploaded");
-      return res.redirect("/kitchen");
+      return res.redirect("/general");
     }
 
     // get file image
@@ -26,7 +26,7 @@ class Image {
     sampleFile.mv(path, function(err) {
       if (err) {
         console.log("-------", err);
-        return res.redirect(`/kitchen`);
+        return res.redirect(`/add-offer`);
       } //
       else {
         sharp(path)
@@ -47,13 +47,67 @@ class Image {
               //if add new offer
               else {
                 Offer.add(req.body).then(item => {
-                  res.redirect(`/kitchen`);
+                  res.redirect(`/add-offer`);
                 });
               }
             } //
             else {
               console.log("Image NOT changed");
-              res.redirect(`/kitchen`);
+              res.redirect(`/general`);
+            }
+          });
+      }
+    });
+  }
+  static slide(req, res, route) {
+    if (!req.files || Object.keys(req.files).length === 0) {
+      console.log("(up) Photo not uploaded");
+      return res.redirect("/general");
+    }
+    let sampleFile = req.files.image;
+    let imgName = req.files.image.name.trim();
+    let newName = `${Date.now()}-${imgName}`;
+    let path = `public/banner/${newName}`;
+    let thumbUrl = `public/banner/thumb/thumb-${newName}`;
+    // for DB
+    let thumbName = `/banner/thumb/thumb-${newName}`;
+    let fullPhoto = `/banner/${newName}`;
+    // \ for DB
+    let width = 252;
+    let height = 201;
+    sampleFile.mv(path, function(err) {
+      if (err) {
+        console.log("-------", err);
+        return res.redirect(`/add-offer`);
+      } //
+      else {
+        sharp(path)
+          .resize(width, height)
+          .toFile(`${thumbUrl}`, (err, info) => {
+            if (!err) {
+              console.log("Image  changed");
+              req.body.image = fullPhoto;
+              req.body.thumb_image = thumbName;
+
+              //if edit new slide
+              if (route == "/slide-edit") {
+                  Image.removeIMG(`public${req.body.current_image}`);
+                  Image.removeIMG(`public${req.body.current_thumb_image}`);
+                  Slide.edit(req.body).then(item => {
+                    res.redirect(`/slide-edit/${req.body.id}`);
+                  });
+              }
+              //if add new slide
+              else {
+                Slide.add(req.body).then(item => {
+                  console.log(item);
+                  res.redirect("/general");
+                });
+              }
+            } //
+            else {
+              console.log("Image NOT changed");
+              res.redirect(`/general`);
             }
           });
       }

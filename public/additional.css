@@ -23,6 +23,9 @@ section .btn.remove:hover {
   background: transparent;
   color: red;
 }
+section.banner img {
+  background: url('../img/loader.gif') no-repeat center;
+}
 section.pie {
   padding: 5em 0 2em;
 }
@@ -45,6 +48,42 @@ section.cart label span em:after {
 }
 section.cart .cart_line .block_title {
   padding-left: 0;
+}
+section.cart .line_pie .btn {
+  display: block;
+  margin-bottom: 1em;
+}
+section.cart .line_pie .btn.remove {
+  color: #fff;
+  border: 1px solid red;
+}
+section.cart .line_pie .btn.remove:hover {
+  color: red;
+}
+section.cart .result.grid {
+  display: grid;
+  padding-top: 1em;
+  max-height: 100%;
+  overflow: visible;
+  flex-wrap: wrap;
+  grid-gap: 3em;
+  grid-template-columns: repeat(auto-fill, minmax(40em, 1fr));
+}
+section.cart .result.grid .line_pie {
+  padding: 2em 3em;
+  max-height: 16em;
+  transition: 0.4s opacity, 0.4s transform;
+}
+section.cart .result.grid .line_pie.remove {
+  opacity: 0.6;
+  transform-origin: center;
+  transform: scale(0.9);
+}
+section.cart .result.grid .line_pie .info {
+  max-width: 28em;
+}
+section.cart .result.grid .line_pie .inner_line {
+  width: 100%;
 }
 section select {
   background: #ededed;
@@ -193,6 +232,12 @@ section .form_line.category_line .btn {
   margin: 0 0 0 1em;
   padding: 0.17em 0.95em;
   height: 5em;
+}
+section .form_bottom:not(.normal) {
+  left: 0;
+  z-index: 5;
+  bottom: 2em;
+  position: sticky;
 }
 .general_alert {
   font-size: 10px;

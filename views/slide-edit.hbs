@@ -1,0 +1,39 @@
+{{> admin-nav }}
+
+<section class="cart">
+    <div class="container">
+        <h2 class="block_title">Slider</h2>
+        <div class="form for_pizza">
+            <!-- for total price -->
+            <div class="cart_line">
+                <h2 class="block_title">
+                    Edit slide
+                </h2>
+                <form action="/slide-edit/{{slide.id}}" method="POST" class="form_line contact_info" ref='uploadForm'
+                    encType="multipart/form-data">
+                    <input type="hidden" name="id" value="{{slide.id}}">
+                    <input type="hidden" name="current_image" value="{{slide.image}}">
+                    <input type="hidden" name="current_thumb_image" value="{{slide.thumb_image}}">
+                    <label class="upload">
+                        <img src="{{slide.thumb_image}}" class="current_image" alt="{{slide.title}}">
+                        <img src="/img/miniStar.svg" alt="" class="review">
+                        <input type="file" name="image" onchange="Image.change(this)">
+                        <span class="error_text">Format must be: png, jpg, jpeg. And max size 2 mb.</span>
+                        <span class="file_name">oerend.jpg</span>
+                        <button class="btn btn-light" type="button" onclick="Image.cancel(this)">cancel</button>
+                    </label>
+                    <label>
+                        <span>Title</span>
+                        <input type="text" name="title" value="{{slide.title}}">
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <div class="line form_bottom normal">
+                        <button class="btn send">
+                            Add slide
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

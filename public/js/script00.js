@@ -17,13 +17,17 @@ function hideLoader() {
 // }
 
 // \ loader
+const correct = el => {
+	let a = el.value;
+	a = a.replace("'","-----")
+	console.log(a)
+}
 
 class Image {
 	static preview(file, wrap) {
 		var reader = new FileReader();
 		reader.readAsDataURL(file);
 		reader.onload = function() {
-			console.log(reader.result);
 			wrap.querySelector(".review").setAttribute("src", reader.result);
 		};
 		reader.onerror = function(error) {
@@ -32,8 +36,10 @@ class Image {
 		};
 	}
 	static change(el) {
-		let size = (el.files[0].size / (1024 * 1024)).toFixed(2);
-		let maxSize = 5.0;
+		// let size = (el.files[0].size / (1024 * 1024)).toFixed(2);
+		console.log(el.files[0])
+		let size = (el.files[0].size);
+		let maxSize = 5242880;
 		let form = el.closest(".upload");
 		let type = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
 		if (type.includes(el.files[0].type) != true || size > maxSize) {
@@ -86,7 +92,6 @@ class Alert {
 }
 class Order {
 	static  category(el) {
-		console.log(el.value)
 		let order = el.value.toLowerCase();
 		if(order == 'sauces' || order == 'drinks') {
 			el.closest('form').classList.remove('for_pizza');
@@ -142,6 +147,47 @@ class Category {
 			}
 		});
 		console.log(info)
+	}
+	static ing_remove(el, info) {
+		el.closest('.category_line').classList.add('remove');
+		console.log(info);
+		fetch(`/remove-ingredient${info}`, {
+			method: "DELETE"
+		}).then(response => response.json())
+		.then(item => {
+			console.log(item)
+			if(item.status == 200) {
+				setTimeout(function () {
+					el.closest('.category_line').remove();
+				}, 1000);
+				Alert.green('Ingredient$ removed!!!');
+			}
+			else {
+				el.closest('.col').classList.remove('remove');
+				Alert.red('Ingredient$ not removed! Try again');
+			}
+		});
+		console.log(info)
+	}
+	static slideRemove(el, wrap, info) {
+		el.closest(`.${wrap}`).classList.add('remove');
+		console.log(`/remove-slide${info}`);
+		fetch(`/remove-slide${info}`, {
+			method: "DELETE"
+		}).then(response => response.json())
+		.then(item => {
+			console.log(item)
+			if(item.status == 200) {
+				setTimeout(function () {
+					el.closest(`.${wrap}`).remove();
+				}, 1000);
+				Alert.green('Slide removed!!!');
+			}
+			else {
+				el.closest(`.${wrap}`).classList.remove('remove');
+				Alert.red('SLide not removed! Try again');
+			}
+		});
 	}
 }
 
@@ -392,6 +438,7 @@ if (document.querySelector(".cart")) {
 jQuery(document).ready(function($) {
 	if ($("body").find(".banner")) {
 		$(".banner").slick({
+			lazyLoad: 'ondemand',
 			draggable: true,
 			autoplay: true,
 			autoplaySpeed: 3500,
