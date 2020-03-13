@@ -18,43 +18,46 @@ function hideLoader() {
 
 const render = (el) => {
 	let offer = '';
-	el.map((item,index) => {
-		return offer += `
-			<div class="line_pie " key="${index}" data-price="${item.price}" data-start="${item.price}">
-				<img src="${item.thumb_image}" alt="">
-				<div class="inner_line">
-					<div class="info">
-						<h3 class="col_title">
-							${item.title}
-						</h3>
-						<div class="bottom">
-							<span>
-								Size:
-							</span>
-							<p>
-								${item.size}
-							</p>
-							
-						</div>
-					</div>
-					<div class="right">
-						<div class="line_summ">
-							<button class="minus" onclick="minus(this)"></button>
-							<input type="text" class="indicator" name="summ" readonly="" value="${item.length}">
-							<button class="plus" onclick="plus(this)"></button>
-						</div>
-						<div class="line_price">
-							<h2 class="price">${item.price} грн.</h2>
-							<button class="remove" onclick="remove(this,${item.id})">
-								Удалить
-							</button>
-						</div>
-					</div>
-				</div>
+	console.log(el);
+	if(el.length > 0) {
+		el.map((item,index) => {
+			return offer += `
+			<div class="line_pie " key="${index}" data-price="${item.price}" data-start="${item.length > 1 ? (item.price / item.length) : item.price}">
+			<img src="${item.thumb_image}" alt="">
+			<div class="inner_line">
+			<div class="info">
+			<h3 class="col_title">
+			${item.title} [${item.id}]
+			</h3>
+			<div class="bottom">
+			<span>
+			Size:
+			</span>
+			<p>
+			${item.type_offer}
+			</p>
+
 			</div>
-		`
-	});
-	document.getElementById('orders').innerHTML = offer;
+			</div>
+			<div class="right">
+			<div class="line_summ">
+			<button class="minus" onclick="minus(this,${item.id})"></button>
+			<input type="text" class="indicator" name="summ" readonly="" value="${item.length}">
+			<button class="plus" onclick="plus(this,${item.id})"></button>
+			</div>
+			<div class="line_price">
+			<h2 class="price">${item.price} грн.</h2>
+			<button class="remove" onclick="remove(this,${item.id})">
+			Удалить
+			</button>
+			</div>
+			</div>
+			</div>
+			</div>
+			`
+		});
+		document.getElementById('orders').innerHTML = offer;
+	}
 }
 
 // \ loader
@@ -170,6 +173,7 @@ class Order {
 		}
 	}
 	static set(name,el) {
+		el.sort(function(a, b){return a.id - b.id});
 		let data = JSON.stringify(el);
 		localStorage.setItem(name,data)
 	}
@@ -185,6 +189,27 @@ class Order {
 			result:result,
 			data:data
 		});
+	}
+	static position(store, property, value) {
+		let data = JSON.parse(localStorage.getItem(store));
+		var result = -1;
+		data.some(function (item, i) {
+			if (item[property] === value) {
+				result = i;
+				return true;
+			}
+		});
+		return Promise.resolve(result);
+	}
+	static remove(id) {
+		//get position obj in storage
+		this.position('order','id',id).then(position => {
+			this.get('order').then(item => {
+				item.splice(position,1);
+				console.log('----after----',item);
+				this.set('order',item);
+			})
+		})
 	}
 }
 
@@ -212,7 +237,6 @@ function toOrder(el,info) {
 		if(exsist == 0) {
 			item.data.push(obj);
 			Order.set('order',item.data);
-			console.log('localStorage now: ',localStorage.getItem('order'));
 		}
 		else {
 			//change price current offer
@@ -442,7 +466,7 @@ function error() {
 		}
 	});
 }
-
+// __________________________________________________________________________________ validation
 // if(document.querySelector('.form')){
 // 	everyField();
 // 	attributeSend();
@@ -514,7 +538,7 @@ function total(el) {
 
 }
 
-function plus(el) {
+function plus(el,id) {
 	var price = el.closest(".line_pie").getAttribute("data-price");
 	var fileld = el.closest(".line_summ").querySelector(".indicator");
 	var startPrice = el.closest(".line_pie").getAttribute("data-start");
@@ -527,9 +551,19 @@ function plus(el) {
 	el.closest(".line_pie").querySelector(".price").innerText =
 	newPrice + " грн.";
 	total();
+	Order.get('order').then(item => {
+		item.filter(el => {
+			if(el.id == id) {
+				el.price = newPrice;
+				el.length = numb;
+				Order.set('order',item)
+			}
+		})
+		
+	})
 }
 
-function minus(el) {
+function minus(el,id) {
 	var price = el.closest(".line_pie").getAttribute("data-price");
 	var fileld = el.closest(".line_summ").querySelector(".indicator");
 	var startPrice = el.closest(".line_pie").getAttribute("data-start");
@@ -544,12 +578,23 @@ function minus(el) {
 		newPrice + " грн.";
 		total();
 		infoTotal();
+		Order.get('order').then(item => {
+			item.filter(el => {
+				if(el.id == id) {
+					el.price = newPrice;
+					el.length = numb;
+					Order.set('order',item)
+				}
+			})
+
+		})
 	}
 }
 
-function remove(el) {
+function remove(el,id) {
 	el.closest(".line_pie").remove();
 	total();
+	Order.remove(id)
 	infoTotal();
 }
 

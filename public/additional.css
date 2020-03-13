@@ -98,6 +98,10 @@ section.cart .result.grid .line_pie .info {
 section.cart .result.grid .line_pie .inner_line {
   width: 100%;
 }
+section .result_preloader {
+  display: block;
+  margin: auto;
+}
 section select {
   background: #ededed;
   border: 1px solid #f0f0f0;

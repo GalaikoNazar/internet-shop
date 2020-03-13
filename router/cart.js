@@ -40,7 +40,7 @@ router.get("/cart", (req, res) => {
 router.post("/cart", (req, res) => {
   try {
     let data = JSON.parse(req.body.order);
-    console.log(data);
+    console.log('-----------------------------------------------------------------',data);
     const { id, size, price, length } = data;
     //create string request to database
     let string = "";
@@ -69,7 +69,7 @@ router.post("/cart", (req, res) => {
         delete item[i].price_big;
         delete item[i].category;
       }
-      // console.log("-------------", item, "----------------");
+      console.log("-------------", item, "----------------");
       res.json({
         orders: item
       });

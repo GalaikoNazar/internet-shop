@@ -99,7 +99,7 @@ class Offer {
       });
   }
   static async getMany(string) {
-    const sql = `SELECT * FROM offers WHERE ${string}`;
+    const sql = `SELECT * FROM offers WHERE ${string} ORDER BY id`;
     return await connection
       .query(sql)
       .then(result => {
