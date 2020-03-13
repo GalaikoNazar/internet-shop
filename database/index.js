@@ -98,6 +98,18 @@ class Offer {
         return err;
       });
   }
+  static async getMany(string) {
+    const sql = `SELECT * FROM offers WHERE ${string}`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
 }
 
 class Category {

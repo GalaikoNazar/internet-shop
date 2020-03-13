@@ -16,7 +16,76 @@ function hideLoader() {
 // 	}, 10)
 // }
 
+const render = (el) => {
+	let offer = '';
+	el.map((item,index) => {
+		return offer += `
+			<div class="line_pie " key="${index}" data-price="${item.price}" data-start="${item.price}">
+				<img src="${item.thumb_image}" alt="">
+				<div class="inner_line">
+					<div class="info">
+						<h3 class="col_title">
+							${item.title}
+						</h3>
+						<div class="bottom">
+							<span>
+								Size:
+							</span>
+							<p>
+								${item.size}
+							</p>
+							
+						</div>
+					</div>
+					<div class="right">
+						<div class="line_summ">
+							<button class="minus" onclick="minus(this)"></button>
+							<input type="text" class="indicator" name="summ" readonly="" value="${item.length}">
+							<button class="plus" onclick="plus(this)"></button>
+						</div>
+						<div class="line_price">
+							<h2 class="price">${item.price} грн.</h2>
+							<button class="remove" onclick="remove(this,${item.id})">
+								Удалить
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		`
+	});
+	document.getElementById('orders').innerHTML = offer;
+}
+
 // \ loader
+function initProject(){
+	if(localStorage.getItem('order') == null) {
+		localStorage.setItem('order',[]);
+	}
+	else {
+		Order.get('order').then(item => {
+			document.querySelector('header .basket .indicator').innerText = item.length;
+		})
+	}
+	if(window.location.pathname == '/cart') {
+		let data = new FormData();
+
+		Order.get('order').then(item => {
+			data.append( "order", JSON.stringify(item));
+			let url = `/cart`;
+			fetch(url, {
+				method: 'POST', 
+				body:data
+			})
+			.then(response => response.json())
+			.then(data => {
+				render(data.orders);
+				total();
+			});
+		})
+
+	}
+}
 const correct = el => {
 	let a = el.value;
 	a = a.replace("'","-----")
@@ -100,6 +169,67 @@ class Order {
 			el.closest('form').classList.add('for_pizza');
 		}
 	}
+	static set(name,el) {
+		let data = JSON.stringify(el);
+		localStorage.setItem(name,data)
+	}
+	static get(name) {
+		let data = JSON.parse(localStorage.getItem(name));
+		return Promise.resolve(data)
+	}
+	static filter(name, el) {
+		let data = JSON.parse(localStorage.getItem(name));
+		// if this offer exsost in my cart
+		let result = data.filter(item => item.id == el.id);
+		return Promise.resolve({
+			result:result,
+			data:data
+		});
+	}
+}
+
+initProject()
+function toOrder(el,info) {
+	var block = document.querySelector("header .indicator");
+	var oldSumm = +block.innerText;
+	var newSumm = oldSumm + 1;
+	block.innerText = newSumm;
+	el.classList.add("active");
+	//create object offer
+	let obj = Object.fromEntries(info);
+	obj.length = 1;
+
+	let price = el.closest('.col_footer').querySelector('.offer_price').innerText.trim();
+	price = price.replace('грн.','');
+	price = price.trim()
+	obj.price = price;
+	let size = el.closest('.offer_wrap').querySelector('.col_size  .active').innerText.trim();
+	obj.size = size;
+	Order.filter('order',obj).then(item => {
+		let exsist = item.result.length;
+		// item.result - does it exist
+		// item.data - localStorage in this moment
+		if(exsist == 0) {
+			item.data.push(obj);
+			Order.set('order',item.data);
+			console.log('localStorage now: ',localStorage.getItem('order'));
+		}
+		else {
+			//change price current offer
+			item.data.filter(item => {
+				if(item.id == obj.id) {
+					item.price = Number(item.price) + Number(price);
+					item.length = Number(item.length) + 1;
+				}
+			})
+			Order.set('order',item.data)
+		}
+	})
+	
+
+	setTimeout(function() {
+		el.classList.remove("active");
+	}, 700);
 }
 
 
@@ -335,22 +465,16 @@ function error() {
 // }
 
 // offer cart
-function toOrder(el) {
-	var block = document.querySelector("header .indicator");
-	var oldSumm = +block.innerText;
-	var newSumm = oldSumm + 1;
-	block.innerText = newSumm;
-	el.classList.add("active");
-	setTimeout(function() {
-		el.classList.remove("active");
-	}, 700);
-}
+
+
+
+
 
 function infoTotal() {
 	if (document.querySelector('.form input[name="total_price"]')) {
 		setTimeout(function() {
 			if (
-				document.querySelector('.form input[name="total_price"]').value < 700
+				document.querySelector('.form input[name="total_price"]').value < 200
 				) {
 				setTimeout(function() {
 					document.querySelector(".modal_window").className += "active info";
@@ -401,7 +525,7 @@ function plus(el) {
 
 	el.closest(".line_pie").setAttribute("data-price", newPrice);
 	el.closest(".line_pie").querySelector(".price").innerText =
-	newPrice + " руб.";
+	newPrice + " грн.";
 	total();
 }
 
@@ -417,7 +541,7 @@ function minus(el) {
 
 		el.closest(".line_pie").setAttribute("data-price", newPrice);
 		el.closest(".line_pie").querySelector(".price").innerText =
-		newPrice + " руб.";
+		newPrice + " грн.";
 		total();
 		infoTotal();
 	}
@@ -432,7 +556,7 @@ function remove(el) {
 if (document.querySelector(".cart")) {
 	total();
 	infoTotal();
-	propos();
+	// propos();
 }
 
 jQuery(document).ready(function($) {

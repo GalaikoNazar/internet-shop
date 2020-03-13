@@ -22,7 +22,7 @@
 {{/if}}
 
 <section class="filter">
-    <ul class="container">
+    <ul class="container none">
         <li class="active">
             <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0)">
@@ -239,7 +239,7 @@
                                 {{#if this.price_small}}{{this.price_small}}{{else}}{{this.price_big}}{{/if}} грн.</h3>
                         </li>
                         <li>
-                            <button class="btn to_order" onclick="toOrder(this)">
+                            <button class="btn to_order" onclick="toOrder(this,[['id', {{id}}]])">
                                 В корзину
                             </button>
                         </li>
