@@ -4,12 +4,16 @@ const { Offer, Category } = require("../database");
 const { Image } = require("../helpers");
 
 router.get("/all-offers", (req, res) => {
-  let obj = {};
-  Offer.get().then(item => {
-    obj.offers = item;
-    obj.titlePage = "All offers";
-    res.render("allOffers", obj);
-  });
+  if (req.session.isAuth21) {
+    let obj = {};
+    Offer.get().then(item => {
+      obj.offers = item;
+      obj.titlePage = "All offers";
+      res.render("allOffers", obj);
+    });
+  } else {
+    res.redirect("/login");
+  }
 });
 router.get("/single/:id", (req, res) => {
   let obj = {};
@@ -18,11 +22,9 @@ router.get("/single/:id", (req, res) => {
     if (item[0].category == "Drinks" || item[0].category == "Sauces") {
       item[0].none = true;
     }
-    console.log(item[0]);
     obj.titlePage = "Single";
     Offer.getMany(`category="Sauces"`).then(el => {
       obj.sauces = el;
-      console.log(obj);
       res.render("single-offer", obj);
     });
     // obj.zlupka = crypto.createHmac('sha256', 'nazargalaiko@gmail.com:Nazar ne faka:0.50:UAH:').update(password).digest('hex');
@@ -30,12 +32,16 @@ router.get("/single/:id", (req, res) => {
 });
 //----------------------CRUD
 router.get("/add-offer", (req, res) => {
-  Category.get().then(cat => {
-    res.render("offer-add", {
-      titlePage: "Add new offer",
-      category_list: cat
+  if (req.session.isAuth21) {
+    Category.get().then(cat => {
+      res.render("offer-add", {
+        titlePage: "Add new offer",
+        category_list: cat
+      });
     });
-  });
+  } else {
+    res.redirect("/login");
+  }
 });
 // add offer
 router.post("/add-offer", (req, res) => {

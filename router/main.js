@@ -12,16 +12,13 @@ router.get("/", (req, res) => {
       item.filter(off => {
         if (off.category == "Sauces") {
           off.public = false;
-        } 
-        else if(off.category == "Drinks"){
-          obj.drinks.push(off)
-        }
-        else {
+        } else if (off.category == "Drinks") {
+          obj.drinks.push(off);
+        } else {
           off.public = true;
         }
       });
       obj.offers = item;
-      console.log(obj)
       obj.titlePage = "Main";
       res.render("main", obj);
     });

@@ -9,7 +9,13 @@
                 </a>
                 <a href="/delivery" {{#_if expected='Delivery' val=titlePage}} class="active" {{/_if}}>Доставка</a>
                 <a href="/contact" {{#_if expected='Contact' val=titlePage}} class="active" {{/_if}}>Контакты</a>
-                <a href="/general">Admin</a>
+
+                {{#if isAuth}}
+                <a href="/general" {{#_if expected='General' val=titlePage}} class="active" {{/_if}}>Admin</a>
+                 <a href="/logout">Logout</a>
+                {{else}}
+                <a href="/login" {{#_if expected='Login' val=titlePage}} class="active" {{/_if}}>Login</a>
+                {{/if}}
             </nav>
             <div class="contact mobile">
 

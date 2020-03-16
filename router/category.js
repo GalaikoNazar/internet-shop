@@ -15,15 +15,19 @@ router.post("/add-category", (req, res) => {
   });
 });
 router.get("/category", (req, res) => {
-  Category.get().then(item => {
-    Ingredient.get().then(ing => {
-      res.render("category", {
-        titlePage: "Category",
-        category_list: item,
-        ingredient_list: ing
+  if (req.session.isAuth21) {
+    Category.get().then(item => {
+      Ingredient.get().then(ing => {
+        res.render("category", {
+          titlePage: "Category",
+          category_list: item,
+          ingredient_list: ing
+        });
       });
     });
-  });
+  } else {
+    res.redirect("/login");
+  }
 });
 router.delete("/remove-category", (req, res) => {
   Category.remove(req.query.id).then(item => {

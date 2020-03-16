@@ -10,11 +10,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const fileUpload = require("express-fileupload");
 const handlebarsHelpers = require("./helpers/handlebars");
+const varMiddleware = require("./middlware/variables");
 app.use(
   fileUpload({
     limits: { filesize: 50 * 1024 * 1024 }
   })
 );
+
 
 const hbs = exphbs.create({
   defaultLayout: "main",
@@ -32,7 +34,7 @@ app.use(
   })
 );
 app.use(express.static(__dirname + "/public"));
-
+app.use(varMiddleware);
 //
 // Routers
 const main = require("./router/main");
@@ -45,6 +47,9 @@ const general = require("./router/general");
 const allOffers = require("./router/offers");
 const category = require("./router/category");
 const banner = require("./router/banner");
+const login = require("./router/login");
+app.use(login);
+app.use(banner);
 app.use(banner);
 app.use(allOffers);
 app.use(general);

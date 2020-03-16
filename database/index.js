@@ -6,7 +6,20 @@ connection.connect(function(err) {
     console.log("Подключение к серверу MySQL успешно установлено");
   }
 });
-
+class User {
+  static async auth(el) {
+    const sql = `SELECT * FROM users WHERE login="${el.name}"`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+}
 class Offer {
   static async add(el) {
     const {
@@ -281,6 +294,7 @@ class Slide {
 }
 
 module.exports.Offer = Offer;
+module.exports.User = User;
 module.exports.Slide = Slide;
 module.exports.Category = Category;
 module.exports.Ingredient = Ingredient;
