@@ -1,7 +1,7 @@
 <section class="pie">
     <div class="container">
         <img src="{{offer.image}}" alt="" class="pie_face">
-        <div class="pie_description offer_wrap">
+        <div class="pie_description offer_wrap " data-col_footer>
             <h2 class="pie_title">
                 {{offer.title}}
             </h2>
@@ -20,7 +20,10 @@
                 </p>
             </div>
             {{/if}}
-            <ul class="pie_size">
+            <ul class="pie_size col_size">
+                {{#if none}}
+
+                {{else}}
                 {{#if offer.price_small }}
                 <li onclick="pieSize(this,{{offer.price_small}})" class="active">25см/800гр</li>
                 {{/if}}
@@ -29,16 +32,17 @@
                     {{/if}}>
                     32см/1200г</li>
                 {{/if}}
+                {{/if}}
             </ul>
 
-            <ul class="pie_footer">
+            <ul class="pie_footer  ">
                 <li>
-                    <h3 class="pie_price offer_price">
+                    <h3 class="pie_price offer_price col_price">
                         {{#if offer.price_small}}{{offer.price_small}}{{else}}{{offer.price_big}}{{/if}} грн.</h3>
                 </li>
 
                 <li>
-                    <button class="btn to_order" onclick="toOrder(this)">
+                    <button class="btn to_order" onclick="toOrder(this,[['id',{{offer.id}}]])">
                         В корзину
                     </button>
                 </li>
@@ -82,111 +86,43 @@
     <button>send faka</button>
 </form> --}}
 
-
+{{#if sauces}}
 <section class="proposition">
     <div class="container">
         <h2 class="block_title">
             Не забудьте соус, так будет еще вкуснее
         </h2>
         <div class="wrap">
+            {{#each sauces}}
             <div class="col">
                 <div class="col_status new">
                     New
                 </div>
                 <div class="col_face">
-                    <img src="/img/sauce.png" alt="">
+                    <img src="{{this.thumb_image}}" alt="">
                 </div>
                 <div class="col_description">
                     <a href="/single" class="page">
-                        <h3 class="col_title">Сырный</h3>
+                        <h3 class="col_title">{{this.title}}</h3>
                         <p class="col_text">
                             90 гр
                         </p>
                     </a>
                     <ul class="col_footer">
                         <li>
-                            <h3 class="col_price">80 руб.</h3>
+                            <h3 class="col_price">{{this.price_small}} грн.</h3>
                         </li>
                         <li>
-                            <button class="btn to_order" onclick="toOrder(this)">
+                            <button class="btn to_order" data-addition="true"
+                                onclick="toOrder(this,[['id',{{this.id}}]])">
                                 В корзину
                             </button>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="col">
-                <div class="col_status hit">
-                    Хит!
-                </div>
-                <div class="col_face">
-                    <img src="/img/sauce.png" alt="">
-                </div>
-                <div class="col_description">
-                    <a href="/single" class="page">
-                        <h3 class="col_title">Сырный</h3>
-                        <p class="col_text">
-                            90 гр
-                        </p>
-                    </a>
-                    <ul class="col_footer">
-                        <li>
-                            <h3 class="col_price">80 руб.</h3>
-                        </li>
-                        <li>
-                            <button class="btn to_order" onclick="toOrder(this)">
-                                В корзину
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col">
-                <div class="col_face">
-                    <img src="/img/sauce.png" alt="">
-                </div>
-                <div class="col_description">
-                    <a href="/single" class="page">
-                        <h3 class="col_title">Сырный</h3>
-                        <p class="col_text">
-                            90 гр
-                        </p>
-                    </a>
-                    <ul class="col_footer">
-                        <li>
-                            <h3 class="col_price">80 руб.</h3>
-                        </li>
-                        <li>
-                            <button class="btn to_order" onclick="toOrder(this)">
-                                В корзину
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col">
-                <div class="col_face">
-                    <img src="/img/sauce.png" alt="">
-                </div>
-                <div class="col_description">
-                    <a href="/single" class="page">
-                        <h3 class="col_title">Сырный</h3>
-                        <p class="col_text">
-                            90 гр
-                        </p>
-                    </a>
-                    <ul class="col_footer">
-                        <li>
-                            <h3 class="col_price">80 руб.</h3>
-                        </li>
-                        <li>
-                            <button class="btn to_order" onclick="toOrder(this)">
-                                В корзину
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            {{/each}}
         </div>
     </div>
 </section>
+{{/if}}

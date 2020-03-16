@@ -15,12 +15,19 @@ router.get("/single/:id", (req, res) => {
   let obj = {};
   Offer.getCurrent(req.params.id).then(item => {
     obj.offer = item[0];
-    obj.titlePage = "single";
+    if (item[0].category == "Drinks" || item[0].category == "Sauces") {
+      item[0].none = true;
+    }
+    console.log(item[0]);
+    obj.titlePage = "Single";
+    Offer.getMany(`category="Sauces"`).then(el => {
+      obj.sauces = el;
+      console.log(obj);
+      res.render("single-offer", obj);
+    });
     // obj.zlupka = crypto.createHmac('sha256', 'nazargalaiko@gmail.com:Nazar ne faka:0.50:UAH:').update(password).digest('hex');
-    res.render("single-offer", obj);
   });
 });
-
 //----------------------CRUD
 router.get("/add-offer", (req, res) => {
   Category.get().then(cat => {

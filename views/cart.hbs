@@ -6,9 +6,6 @@
         </div>
 
 
-
-
-
         <div class="line_total">
             <p>
                 Итого:
@@ -16,98 +13,38 @@
             <h2 class="total">2220 руб.</h2>
         </div>
 
-
+        {{#if drinks}}
         <div class="cart_line more_offer">
             <h2 class="block_title">Добавить в заказ</h2>
             <div class="line">
-                <div class="col" data-price="100">
+                {{#each drinks}}
+                <div class="col" data-price="{{this.price_small}}">
                     <div class="col_face">
-                        <img src="/img/coca.png" alt="">
+                        <img src="{{this.image}}" alt="{{this.title}}">
                     </div>
                     <div class="col_description">
                         <a href="single.html" class="page">
-                            <h3 class="col_title">Кока-Кола стандарт</h3>
+                            <h3 class="col_title">{{this.title}}</h3>
 
                         </a>
                         <ul class="col_footer">
                             <li>
-                                <h3 class="col_price">100 руб.</h3>
+                                <h3 class="col_price">{{this.price_small}} грн.</h3>
                             </li>
                             <li>
-                                <button class="btn to_order" onclick="toOrder(this)">
+                                <button class="btn to_order" data-addition='true'
+                                    onclick="toOrder(this,[['id', {{this.id}}]])">
                                     В корзину
                                 </button>
                             </li>
                         </ul>
                     </div>
                 </div>
+                {{/each}}
 
-                <div class="col" data-price="100">
-                    <div class="col_face">
-                        <img src="/img/coca.png" alt="">
-                    </div>
-                    <div class="col_description">
-                        <a href="single.html" class="page">
-                            <h3 class="col_title">Кока-Кола стандарт</h3>
-
-                        </a>
-                        <ul class="col_footer">
-                            <li>
-                                <h3 class="col_price">100 руб.</h3>
-                            </li>
-                            <li>
-                                <button class="btn to_order" onclick="toOrder(this)">
-                                    В корзину
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col" data-price="100">
-                    <div class="col_face">
-                        <img src="/img/coca.png" alt="">
-                    </div>
-                    <div class="col_description">
-                        <a href="single.html" class="page">
-                            <h3 class="col_title">Кока-Кола стандарт</h3>
-
-                        </a>
-                        <ul class="col_footer">
-                            <li>
-                                <h3 class="col_price">100 руб.</h3>
-                            </li>
-                            <li>
-                                <button class="btn to_order" onclick="toOrder(this)">
-                                    В корзину
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col" data-price="100">
-                    <div class="col_face">
-                        <img src="/img/coca.png" alt="">
-                    </div>
-                    <div class="col_description">
-                        <a href="single.html" class="page">
-                            <h3 class="col_title">Кока-Кола стандарт</h3>
-
-                        </a>
-                        <ul class="col_footer">
-                            <li>
-                                <h3 class="col_price">100 руб.</h3>
-                            </li>
-                            <li>
-                                <button class="btn to_order" onclick="toOrder(this)">
-                                    В корзину
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
+        {{/if}}
 
         <form action="" class="form">
             <!-- for total price -->
@@ -274,4 +211,3 @@
 
     </div>
 </section>
-{{!-- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores quam consequuntur iusto vero. A dicta assumenda corporis, laborum vitae voluptate! --}}

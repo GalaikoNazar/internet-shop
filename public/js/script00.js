@@ -18,7 +18,6 @@ function hideLoader() {
 
 const render = (el) => {
 	let offer = '';
-	console.log(el);
 	if(el.length > 0) {
 		el.map((item,index) => {
 			return offer += `
@@ -27,14 +26,14 @@ const render = (el) => {
 			<div class="inner_line">
 			<div class="info">
 			<h3 class="col_title">
-			${item.title} [${item.id}]
+			${item.title}
 			</h3>
-			<div class="bottom">
+			<div class="bottom ${item.category == 'Sauces' ? ' none' : ''}">
 			<span>
 			Size:
 			</span>
 			<p>
-			${item.type_offer}
+			${item.category != 'Drinks' ? item.type_offer : item.category}
 			</p>
 
 			</div>
@@ -57,6 +56,9 @@ const render = (el) => {
 			`
 		});
 		document.getElementById('orders').innerHTML = offer;
+	}
+	else {
+		document.getElementById('orders').innerHTML = `<img src="/img/loader.gif">`;
 	}
 }
 
@@ -224,12 +226,25 @@ function toOrder(el,info) {
 	let obj = Object.fromEntries(info);
 	obj.length = 1;
 
-	let price = el.closest('.col_footer').querySelector('.offer_price').innerText.trim();
-	price = price.replace('грн.','');
-	price = price.trim()
-	obj.price = price;
-	let size = el.closest('.offer_wrap').querySelector('.col_size  .active').innerText.trim();
-	obj.size = size;
+	if(el.closest('.col_footer')) {
+		let price = el.closest('.col_footer').querySelector('.col_price').innerText.trim();
+		price = price.replace('грн.','');
+		price = price.trim()
+		obj.price = price;
+	}
+	else {
+		let price = el.closest('[data-col_footer]').querySelector('.col_price').innerText.trim();
+		price = price.replace('грн.','');
+		price = price.trim()
+		obj.price = price;
+	}
+	
+
+	if(!el.getAttribute('data-addition')) {
+		let size = el.closest('.offer_wrap').querySelector('.col_size  .active').innerText.trim();
+		obj.size = size;
+	}
+
 	Order.filter('order',obj).then(item => {
 		let exsist = item.result.length;
 		// item.result - does it exist
@@ -237,6 +252,7 @@ function toOrder(el,info) {
 		if(exsist == 0) {
 			item.data.push(obj);
 			Order.set('order',item.data);
+			initProject();
 		}
 		else {
 			//change price current offer
@@ -246,7 +262,8 @@ function toOrder(el,info) {
 					item.length = Number(item.length) + 1;
 				}
 			})
-			Order.set('order',item.data)
+			Order.set('order',item.data);
+			initProject()
 		}
 	})
 	

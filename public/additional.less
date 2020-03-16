@@ -32,6 +32,13 @@ header {
 }
 
 section {
+	.more_offer {
+		img {
+			max-height: 10rem;
+			object-fit: contain;
+			object-position: center;
+		}
+	}
 	.btn {
 		&.remove_order, &.remove {
 			background: red;
@@ -51,6 +58,9 @@ section {
 		padding: 5em 0 2em;
 		.pie_description {
 			width: 100%;
+		}
+		.pie_face {
+			object-fit: contain;
 		}
 	}
 	&.menu {

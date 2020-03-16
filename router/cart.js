@@ -3,44 +3,27 @@ const router = Router();
 const { Offer } = require("../database");
 
 router.get("/cart", (req, res) => {
-  res.render("Cart", {
-    titlePage: "Cart"
+  Offer.getMany('category="Drinks"').then(el => {
+    el.forEach(item => {
+      // delete item.image;
+      delete item.status;
+      delete item.storage;
+      delete item.type_big;
+      delete item.price_big;
+      delete item.type_small;
+      delete item.description;
+      delete item.main_ingredient;
+    });
+    res.render("Cart", {
+      titlePage: "Cart",
+      drinks: el
+    });
   });
-  // const { id, size, price, length } = req.query;
-  //create string request to database
-  // let string = "";
-  // for (let i = 0; i < id.length; i++) {
-  //   if (id.length > 1) {
-  //     if (i < +id.length - 1) {
-  //       string += `id="${id[i]}" OR `;
-  //     } else {
-  //       string += `id="${id[i]}"`;
-  //     }
-  //   }
-  // }
-  // Offer.getMany(string).then(item => {
-  //   for (let i = 0; i < item.length; i++) {
-  //     item[i].length = length[i];
-  //     item[i].type_offer = size[i];
-  //     item[i].price = price[i];
-  //     delete item[i].description;
-  //     delete item[i].storage;
-  //     delete item[i].type_small;
-  //     delete item[i].price_small;
-  //     delete item[i].status;
-  //     delete item[i].main_ingredient;
-  //     delete item[i].image;
-  //     delete item[i].type_big;
-  //     delete item[i].price_big;
-  //     delete item[i].category;
-  //   }
-  // });
 });
 
 router.post("/cart", (req, res) => {
   try {
     let data = JSON.parse(req.body.order);
-    console.log('-----------------------------------------------------------------',data);
     const { id, size, price, length } = data;
     //create string request to database
     let string = "";
@@ -51,7 +34,6 @@ router.post("/cart", (req, res) => {
         string += `id="${data[i].id}"`;
       }
     }
-
     //request to database
     Offer.getMany(string).then(item => {
       for (let i = 0; i < item.length; i++) {
@@ -67,9 +49,7 @@ router.post("/cart", (req, res) => {
         delete item[i].image;
         delete item[i].type_big;
         delete item[i].price_big;
-        delete item[i].category;
       }
-      console.log("-------------", item, "----------------");
       res.json({
         orders: item
       });

@@ -26,6 +26,11 @@ header .basket .indicator {
   opacity: 0;
   position: relative;
 }
+section .more_offer img {
+  max-height: 10rem;
+  object-fit: contain;
+  object-position: center;
+}
 section .btn.remove_order,
 section .btn.remove {
   background: red;
@@ -44,6 +49,9 @@ section.pie {
 }
 section.pie .pie_description {
   width: 100%;
+}
+section.pie .pie_face {
+  object-fit: contain;
 }
 section.menu .wrap .col {
   transition: 0.4s opacity, 0.4s transform;

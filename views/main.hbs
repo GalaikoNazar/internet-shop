@@ -175,7 +175,7 @@
 
 <section class="menu">
     <div class="container">
-        <div class="menu_panel">
+        <div class="menu_panel none">
             <ul class="category">
                 <li class="active">С говядиной </li>
                 <li>С курицей</li>
@@ -199,6 +199,65 @@
         <div class="wrap">
             {{#if offers}}
             {{#each offers}}
+            {{#if this.public}}
+            <div class="col">
+                {{#_if expected='Hit' val=status }}
+                <div class="col_status hit">
+                    Hit
+                </div>
+                {{/_if}}
+
+                {{#_if expected='New' val=status }}
+                <div class="col_status new">
+                    New
+                </div>
+                {{/_if}}
+                <div class="col_face">
+                    <a href="/single/{{this.id}}">
+                        <img src="{{this.thumb_image}}" alt="">
+                    </a>
+                </div>
+                <div class="col_description offer_wrap">
+                    <a href="/single/{{this.id}}" class="page">
+                        <h3 class="col_title">{{this.title}}</h3>
+                        <p class="col_text">
+                            {{this.description}}
+                        </p>
+                    </a>
+                    <ul
+                        class="col_size {{#_if expected='Sauces' val=category}} none{{/_if}}{{#_if expected='Drinks' val=category}} none{{/_if}}">
+                        {{#if this.price_small }}
+                        <li onclick="pieSize(this,{{this.price_small}})" class="active">25см/800гр</li>
+                        {{/if}}
+                        {{#if this.price_big }}
+                        <li onclick="pieSize(this,{{this.price_big}})" {{#if this.price_small}} {{else}}class="active"
+                            {{/if}}>32см/1200г</li>
+                        {{/if}}
+                    </ul>
+                    <ul class="col_footer">
+                        <li>
+                            <h3 class="col_price offer_price">
+                                {{#if this.price_small}}{{this.price_small}}{{else}}{{this.price_big}}{{/if}} грн.</h3>
+                        </li>
+                        <li>
+                            <button class="btn to_order" onclick="toOrder(this,[['id', {{id}}]])">
+                                В корзину
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {{/if}}
+            {{/each}}
+            {{/if}}
+        </div>
+        {{#if drinks}}
+        <h2 class="block_title">Drinks</h2>
+        <br/>
+        <br/>
+        <br/>
+        <div class="wrap">
+            {{#each drinks}}
             <div class="col">
                 {{#_if expected='Hit' val=status }}
                 <div class="col_status hit">
@@ -247,9 +306,9 @@
                 </div>
             </div>
             {{/each}}
-            {{/if}}
         </div>
-        <div class="pagination">
+        {{/if}}
+        <div class="pagination none">
             <a href="/" class="arrow">
                 <svg viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
