@@ -1,8 +1,6 @@
-
 const { Router } = require("express");
 const router = Router();
 const { Slide } = require("../database");
-// const { correct } = require("../helpers/correct");
 const { Image } = require("../helpers");
 
 router.post("/add-slide", (req, res) => {
@@ -20,13 +18,11 @@ router.get("/slide-edit/:id", (req, res) => {
 // edit current page
 router.post("/slide-edit/:id", (req, res) => {
   if (req.files) {
-    Image.slide(req, res,'/slide-edit');
+    Image.slide(req, res, "/slide-edit");
   } else {
-    console.log("--------", req.body);
     req.body.image = req.body.current_image;
     req.body.thumb_image = req.body.current_thumb_image;
     Slide.edit(req.body).then(item => {
-      console.log(item);
       res.redirect(`/slide-edit/${req.params.id}`);
     });
   }
@@ -35,7 +31,6 @@ router.delete("/remove-slide", (req, res) => {
   console.log(req.query);
   if (req.query.id) {
     Slide.remove(req.query.id).then(item => {
-      console.log(item);
       Image.removeIMG(`public${req.query.image}`);
       Image.removeIMG(`public${req.query.thumb_image}`);
       res.json({
@@ -49,7 +44,4 @@ router.delete("/remove-slide", (req, res) => {
     });
   }
 });
-
-router.post("/edit-slide", (req, res) => {});
-
 module.exports = router;

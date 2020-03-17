@@ -74,21 +74,22 @@ function initProject(){
 	}
 	if(window.location.pathname == '/cart') {
 		let data = new FormData();
-
-		Order.get('order').then(item => {
-			data.append( "order", JSON.stringify(item));
-			let url = `/cart`;
-			fetch(url, {
-				method: 'POST', 
-				body:data
+		if(document.querySelectorAll('#orders .line_pie').lengt > 0){
+			Order.get('order').then(item => {
+				data.append( "order", JSON.stringify(item));
+				let url = `/cart`;
+				fetch(url, {
+					method: 'POST', 
+					body:data
+				})
+				.then(response => response.json())
+				.then(data => {
+					render(data.orders);
+					total();
+				});
 			})
-			.then(response => response.json())
-			.then(data => {
-				render(data.orders);
-				total();
-			});
-		})
 
+		}
 	}
 }
 const correct = el => {
@@ -285,6 +286,29 @@ class Offer {
 			if(item.status == 200) {
 				setTimeout(function () {
 					el.closest('.col').remove();
+				}, 1000);
+				Alert.green('Offer removed!!!');
+			}
+			else {
+				el.closest('.col').classList.remove('remove');
+				Alert.red('Offer not removed! Try again');
+			}
+		});
+		console.log(info)
+	}
+}
+
+class Actions {
+	static remove(el, info) {
+		el.closest('.line_pie ').classList.add('remove');
+		
+		fetch(`/actions-remove${info}`, {
+			method: "DELETE"
+		}).then(response => response.json())
+		.then(item => {
+			if(item.status == 200) {
+				setTimeout(function () {
+					el.closest('.line_pie').remove();
 				}, 1000);
 				Alert.green('Offer removed!!!');
 			}
@@ -512,16 +536,24 @@ function error() {
 
 
 function infoTotal() {
-	if (document.querySelector('.form input[name="total_price"]')) {
-		setTimeout(function() {
-			if (
-				document.querySelector('.form input[name="total_price"]').value < 200
-				) {
-				setTimeout(function() {
-					document.querySelector(".modal_window").className += "active info";
-				}, 1000);
+	if(document.querySelectorAll('#orders .line_pie ').length > 0) {
+		if (document.querySelector('.form input[name="total_price"]')) {
+			setTimeout(function() {
+				if (
+					document.querySelector('.form input[name="total_price"]').value < 200
+					) {
+					setTimeout(function() {
+						document.querySelector(".modal_window").className += "active info";
+					}, 1000);
+			}
+		}, 1000);
 		}
-	}, 1000);
+	}
+	else {
+		if(document.querySelector('#orders')){
+			document.querySelector('#orders').innerHTML = '';	
+		}
+		
 	}
 }
 
@@ -627,7 +659,7 @@ jQuery(document).ready(function($) {
 			lazyLoad: 'ondemand',
 			draggable: true,
 			autoplay: true,
-			autoplaySpeed: 3500,
+			autoplaySpeed: 4000,
 			infinite: true,
 			slidesToScroll: 1,
 			arrows: false,

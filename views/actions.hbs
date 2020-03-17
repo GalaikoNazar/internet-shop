@@ -2,82 +2,28 @@
     <div class="container">
         <h2 class="block_title">Акции</h2>
         <div class="wrap">
+            {{#if actions_list}}
+            {{#each actions_list}}
             <div class="col">
                 <div class="col_face">
-                    <a href="/single-action/1">
-                        <img src="/img/1c4eab1f1de6313e9ac9039651fe24c4.jpg" alt="">
+                    <a href="/single-actions/{{this.id}}">
+                        <img src="{{this.thumb_image}}" alt="">
                     </a>
                 </div>
                 <div class="col_description">
-                    <a href="/single-action/1" class="page">
-                        <h3 class="col_title">3 пирога за 999 рублей</h3>
+                    <a href="/single-actions/{{this.id}}" class="page">
+                        <h3 class="col_title">{{this.title}}</h3>
                         <p class="col_text">
-                            В акции участвуют любые большие пиццы на тонком тесте. Акция действует при заказе на
-                            доставку и навынос. Срок действия акции ограничен.
+                            {{this.description}}
                         </p>
                     </a>
-                    <a href="" class="btn">
+                    <a href="/single-actions/{{this.id}}" class="btn">
                         Воспользоваться
                     </a>
                 </div>
             </div>
-            <div class="col">
-                <div class="col_face">
-                    <a href="/single-action/1">
-                        <img src="/img/1b9176bef6f8948b6563ae27772ac99b.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col_description">
-                    <a href="/single-action/1" class="page">
-                        <h3 class="col_title">3 пирога за 999 рублей</h3>
-                        <p class="col_text">
-                            В акции участвуют любые большие пиццы на тонком тесте. Акция действует при заказе на
-                            доставку и навынос. Срок действия акции ограничен.
-                        </p>
-                    </a>
-                    <a href="" class="btn">
-                        Воспользоваться
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="col_face">
-                    <a href="/single-action/1">
-                        <img src="/img/025ad9a05596515e7a8d20b31682589e.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col_description">
-                    <a href="/single-action/1" class="page">
-                        <h3 class="col_title">3 пирога за 999 рублей</h3>
-                        <p class="col_text">
-                            В акции участвуют любые большие пиццы на тонком тесте. Акция действует при заказе на
-                            доставку и навынос. Срок действия акции ограничен.
-                        </p>
-                    </a>
-                    <a href="" class="btn">
-                        Воспользоваться
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="col_face">
-                    <a href="/single-action/1">
-                        <img src="/img/3d37488fd125c99256407516797afb69.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col_description">
-                    <a href="/single-action/1" class="page">
-                        <h3 class="col_title">3 пирога за 999 рублей</h3>
-                        <p class="col_text">
-                            В акции участвуют любые большие пиццы на тонком тесте. Акция действует при заказе на
-                            доставку и навынос. Срок действия акции ограничен.
-                        </p>
-                    </a>
-                    <a href="/single-action/1" class="btn">
-                        Воспользоваться
-                    </a>
-                </div>
-            </div>
+            {{/each}}
+            {{/if}}
         </div>
     </div>
 </section>

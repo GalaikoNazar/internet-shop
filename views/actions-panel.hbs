@@ -1,0 +1,70 @@
+{{> admin-nav }}
+
+<section class="cart">
+    <div class="container">
+        <h2 class="block_title">Actions</h2>
+        <div class="form for_pizza">
+            <!-- for total price -->
+            <div class="cart_line">
+                <h2 class="block_title">
+                    Add new action
+                </h2>
+                <form action="/add-actions" method="POST" class="form_line contact_info" ref='uploadForm'
+                    encType="multipart/form-data">
+                    <label class="upload">
+                        <img src="/img/miniStar.svg" alt="" class="review">
+                        <input type="file" name="image" onchange="Image.change(this)" required>
+                        <span class="error_text">Format must be: png, jpg, jpeg. And max size 2 mb.</span>
+                        <span class="file_name">oerend.jpg</span>
+                        <button class="btn btn-light" type="button" onclick="Image.cancel(this)">cancel</button>
+                    </label>
+                    <label>
+                        <span>Title action</span>
+                        <input type="text" name="title" class="">
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <label>
+                        <span>Description action</span>
+                        <textarea name="description"></textarea>
+                        <span class="error">Поле обязательно для заполнения</span>
+                    </label>
+                    <div class="line form_bottom normal">
+                        <button class="btn send">
+                            Add slide
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="result grid">
+                {{#if actions_list}}
+                {{#each actions_list}}
+                <div class="line_pie ">
+                    <img src="{{this.thumb_image}}" alt="">
+                    <div class="inner_line">
+                        <div class="info">
+                            <h3 class="col_title">
+                                {{this.title}}
+                            </h3>
+                        </div>
+                        <div class="right">
+                            <div class="line_summ">
+                            </div>
+                            <div class="line_price">
+                                <button class="btn remove"
+                                    onclick="Actions.remove(this,'?id={{this.id}}&image={{this.image}}&thumb_image={{this.thumb_image}}')">
+                                    Удалить
+                                </button>
+                                <a href="/actions-edit/{{this.id}}" class="btn send">
+                                    Edit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                {{/if}}
+            </div>
+
+        </div>
+    </div>
+</section>

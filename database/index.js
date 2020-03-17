@@ -6,6 +6,14 @@ connection.connect(function(err) {
     console.log("Подключение к серверу MySQL успешно установлено");
   }
 });
+const closeConnection = () => {
+  return connection.end(function(err) {
+    if (err) {
+      return console.log("Ошибка: " + err.message);
+    }
+    console.log("Подключение закрыто");
+  });
+};
 class User {
   static async auth(el) {
     const sql = `SELECT * FROM users WHERE login="${el.name}"`;
@@ -292,9 +300,73 @@ class Slide {
       });
   }
 }
+class Actions {
+  static async add(el) {
+    const sql = `INSERT INTO actions(title,description, image, thumb_image) VALUES("${el.title}","${el.description}", "${el.image}", "${el.thumb_image}")`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        console.log("Data post, saved");
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async get() {
+    const sql = `SELECT * FROM actions`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async getCurrent(id) {
+    const sql = `SELECT * FROM actions WHERE id="${id}"`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async remove(id) {
+    const sql = `DELETE FROM actions WHERE id="${id}"`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+  static async edit(el) {
+    const sql = `UPDATE actions SET title="${el.title}", description="${el.description}", image="${el.image}", thumb_image="${el.thumb_image}"  WHERE id="${el.id}"`;
+    return await connection
+      .query(sql)
+      .then(result => {
+        return result[0];
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  }
+}
 
-module.exports.Offer = Offer;
 module.exports.User = User;
+module.exports.Offer = Offer;
 module.exports.Slide = Slide;
+module.exports.Actions = Actions;
 module.exports.Category = Category;
 module.exports.Ingredient = Ingredient;

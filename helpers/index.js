@@ -1,7 +1,6 @@
-// const sharp = require("sharp");
 const fs = require("fs");
 const sharp = require("sharp");
-const { Offer, Slide } = require("../database");
+const { Offer, Slide, Actions } = require("../database");
 var bg = require("gulp-util");
 
 class Image {
@@ -108,6 +107,60 @@ class Image {
             else {
               console.log("Image NOT changed");
               res.redirect(`/general`);
+            }
+          });
+      }
+    });
+  }
+  static actions(req, res, route) {
+    if (!req.files || Object.keys(req.files).length === 0) {
+      console.log("(up) Photo not uploaded");
+      return res.redirect("/general");
+    }
+    let sampleFile = req.files.image;
+    let imgName = req.files.image.name.trim();
+    let newName = `${Date.now()}-${imgName}`;
+    let path = `public/actions/${newName}`;
+    let thumbUrl = `public/actions/thumb/thumb-${newName}`;
+    // for DB
+    let thumbName = `/actions/thumb/thumb-${newName}`;
+    let fullPhoto = `/actions/${newName}`;
+    // \ for DB
+    let width = 252;
+    let height = 201;
+    sampleFile.mv(path, function(err) {
+      if (err) {
+        console.log("-------", err);
+        return res.redirect(`/add-actions`);
+      } //
+      else {
+        sharp(path)
+          .resize(width, height)
+          .toFile(`${thumbUrl}`, (err, info) => {
+            if (!err) {
+              console.log("Image  changed");
+              req.body.image = fullPhoto;
+              req.body.thumb_image = thumbName;
+
+              //if edit new slide
+              if (route == "/actions-edit") {
+                  Image.removeIMG(`public${req.body.current_image}`);
+                  Image.removeIMG(`public${req.body.current_thumb_image}`);
+                  Actions.edit(req.body).then(item => {
+                    res.redirect(`/actions-edit/${req.body.id}`);
+                  });
+              }
+              //if add new slide
+              else {
+                Actions.add(req.body).then(item => {
+                  console.log(item);
+                  res.redirect("/actions");
+                });
+              }
+            } //
+            else {
+              console.log("Image NOT changed");
+              res.redirect(`/actions`);
             }
           });
       }

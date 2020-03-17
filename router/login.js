@@ -6,13 +6,11 @@ const { User } = require("../database");
 router.get("/login", (req, res) => {
   if (!req.session.isAuth21) {
     req.session.isAuth21 = false;
-    console.log(req.session);
     res.render("login", {
       titlePage: "Login",
       errMess: req.session.errMess0
     });
   } else {
-    console.log(req.session);
     res.render("login", {
       titlePage: "Login",
       errMess: req.session.errMess0
@@ -40,14 +38,10 @@ router.post("/login", (req, res) => {
   });
 });
 
-
 router.get("/logout", (req, res) => {
-    req.session.isAuth21 = false;
-    req.session.errMess0 = '';
-    res.redirect('/login');
-})
-
-
-
+  req.session.isAuth21 = false;
+  req.session.errMess0 = "";
+  res.redirect("/login");
+});
 
 module.exports = router;
